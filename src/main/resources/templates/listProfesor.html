@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Profesores</title>
+<script type="text/javascript"
+	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css"></link>
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+
+	<div class="container">
+		<form id="myform">
+			<div class="row clearfix">
+				<div class="col-md-12 column">
+					<a style="border-bottom-color: green" th:href="@{/profesor/irRegistrar}"
+						id="add-row" type="button"
+						class="btn btn-primary btn-md left-block"> <span
+						class="glyphicon glyphicon-plus"></span> Profesor
+					</a>
+					<a style="border-bottom-color: green" th:href="@{/profesor/irBuscar}"
+						id="add-row" type="button"
+						class="btn btn-primary btn-md left-block"> <span
+						class="glyphicon glyphicon-search"></span> 
+					</a>
+					
+					<table class="table table-bordered table-hover table-striped"
+						id="tab_logic">
+						<thead>
+							<tr>
+								<th class="text-center">ID</th>
+								<th class="text-center">CÓDIGO</th>
+								<th class="text-center">NOMBRE</th>
+								<th class="text-center">APELLIDO</th>
+								<th class="text-center">EMAIL</th>
+								<th class="text-center">PASSWORD</th>
+								<th class="text-center">TELÉFONO</th>
+								<th class="text-center">GRADO</th>
+								<th class="text-center">DESCRIPCIÓN</th>
+								<th class="text-center">OPERACIÓN</th>
+								<th class="text-center">OPERACIÓN</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="p: ${listaProfesor}">
+								<td th:text="${p.idProfesor}"></td>
+								<td th:text="${p.codigoProfesor}"></td>
+								<td th:text="${p.nombreProfesor}"></td>
+								<td th:text="${p.apellidoProfesor}"></td>
+								<td th:text="${p.emailProfesor}"></td>
+								<td th:text="${p.passwordProfesor}"></td>
+								<td th:text="${p.telefonoProfesor}"></td>
+								<td th:text="${p.gradoProfesor}"></td>
+								<td th:text="${p.descripcionProfesor}"></td>
+								<td><a th:href="@{/profesor/eliminar?id=}+${p.idProfesor}">Eliminar</a></td>
+								<td><a th:href="@{'/profesor/modificar/' + ${p.idProfesor}}">Modificar</a></td>
+							</tr>
+						</tbody>
+
+					</table>
+
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

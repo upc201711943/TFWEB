@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title>Profesor</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css"></link>
+
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" th:src="@{/js/profesor.js}"></script>
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container">
+		<form th:action="@{/profesor/registrar}" method="post"
+			th:object="${profesor}">
+			<div class="form-group">
+				<label for="idProfesor">ID:</label> 
+				<input type="text"	th:field="*{idProfesor}"></input>
+				
+				<div class="form-group">
+				<label for="codigoProfesor">Código:</label> 
+				<input type="text"	th:field="*{codigoProfesor}"
+				class="form-control" id="codigo"></input>
+				<div class="alert alert-danger" 
+				th:if="${#fields.hasErrors('codigoProfesor')}"
+				th:errors="*{codigoProfesor}"></div>
+				
+				</div>
+				
+				<div class="form-group">
+				<label for="nombreProfesor">Nombre:</label> 
+				<input type="text"	th:field="*{nombreProfesor}"
+				class="form-control" id="nombre"></input>
+				<div class="alert alert-danger" 
+				th:if="${#fields.hasErrors('nombreProfesor')}"
+				th:errors="*{nombreProfesor}"></div>
+				
+				</div>
+				
+				<div class="form-group">
+				<label for="apellidoProfesor">Apellido:</label> 
+				<input type="text"	th:field="*{apellidoProfesor}"
+				class="form-control" id="apellido"></input>
+				<div class="alert alert-danger" 
+				th:if="${#fields.hasErrors('apellidoProfesor')}"
+				th:errors="*{apellidoProfesor}"></div>
+				
+				</div>
+				
+				<div class="form-group">
+				<label for="emailProfesor">Email:</label> 
+				<input type="text"	th:field="*{emailProfesor}"
+				class="form-control" id="email"></input>
+				<div class="alert alert-danger" 
+				th:if="${#fields.hasErrors('emailProfesor')}"
+				th:errors="*{emailProfesor}"></div>
+				
+				</div>
+				
+				<div class="form-group">
+				<label for="passwordProfesor">Password:</label> 
+				<input type="text"	th:field="*{passwordProfesor}"
+				class="form-control" id="password"></input>
+				<div class="alert alert-danger" 
+				th:if="${#fields.hasErrors('passwordProfesor')}"
+				th:errors="*{passwordProfesor}"></div>
+				
+				</div>
+					
+				<div class="form-group">
+				<label for="telefonoProfesor">Teléfono:</label> 
+				<input type="text"	th:field="*{telefonoProfesor}"
+				class="form-control" id="telefono"></input>
+				<div class="alert alert-danger" 
+				th:if="${#fields.hasErrors('telefonoProfesor')}"
+				th:errors="*{telefonoProfesor}"></div>
+				</div>
+				
+				<div class="form-group">
+				<label for="gradoProfesor">Grado:</label> 
+				<select class="form-control" th:field="*{gradoProfesor}" id="grado">
+					<option th:value="Estudiante" th:text="Estudiante"/>
+					<option th:value="Bachiller" th:text="Bachiller"/>
+					<option th:value="Licenciado" th:text="Licenciado"/>
+					<option th:value="Maestro" th:text="Maestro"/>
+					<option th:value="Doctorado" th:text="Doctorado"/> 		 
+				</select>
+				<div class="alert alert-danger" 
+				th:if="${#fields.hasErrors('gradoProfesor')}"
+				th:errors="*{gradoProfesor}"></div>
+				</div>
+				
+				<div class="form-group">
+				<label for="descripcionProfesor">Descripción:</label> 
+				<input type="text"	th:field="*{descripcionProfesor}"
+				class="form-control" id="grado"></input>
+				<div class="alert alert-danger" 
+				th:if="${#fields.hasErrors('descripcionProfesor')}"
+				th:errors="*{descripcionProfesor}"></div>
+				
+				</div>
+			</div>
+			<button type ="submit" class="btn btn-primary">Aceptar</button>
+			<a href="/profesor/listar" class="btn btn-danger">Cancelar</a>
+		</form>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+	
+	
+</body>
+</html>

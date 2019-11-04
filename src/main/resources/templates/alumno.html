@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title>Alumno</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css"></link>
+
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" th:src="@{/js/alumno.js}"></script>
+
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container">
+		<form th:action="@{/alumno/registrar}" method="post"
+			th:object="${alumno}">
+			<div class="form-group">
+				<label for="idAlumno">ID:</label> 
+				<input type="text" th:field="*{idAlumno}"></input>
+				
+				<div class="form-group">
+				<label for="codigoAlumno">Código:</label> 
+				<input type="text"	th:field="*{codigoAlumno}"
+				class="form-control" id="codigo"></input>
+				<div class="alert alert-danger" 
+				th:if="${#fields.hasErrors('codigoAlumno')}"
+				th:errors="*{codigoAlumno}"></div>
+				
+				</div>
+				
+				<div class="form-group">
+				<label for="nombreAlumno">Nombre:</label> 
+				<input type="text"	th:field="*{nombreAlumno}"
+				class="form-control" id="nombre"></input>
+				<div class="alert alert-danger" 
+				th:if="${#fields.hasErrors('nombreAlumno')}"
+				th:errors="*{nombreAlumno}"></div>
+				
+				</div>
+				
+				<div class="form-group">
+				<label for="apellidoAlumno">Apellido:</label> 
+				<input type="text"	th:field="*{apellidoAlumno}"
+				class="form-control" id="apellido"></input>
+				<div class="alert alert-danger" 
+				th:if="${#fields.hasErrors('apellidoAlumno')}"
+				th:errors="*{apellidoAlumno}"></div>
+				
+				</div>
+				
+				<div class="form-group">
+				<label for="emailAlumno">E-mail:</label> 
+				<input type="text"	th:field="*{emailAlumno}"
+				class="form-control" id="email"></input>
+				<div class="alert alert-danger" 
+				th:if="${#fields.hasErrors('emailAlumno')}"
+				th:errors="*{emailAlumno}"></div>
+				
+				</div>
+				
+				<div class="form-group">
+				<label for="passwordAlumno">Password:</label> 
+				<input type="text"	th:field="*{passwordAlumno}"
+				class="form-control" id="password"></input>
+				<div class="alert alert-danger" 
+				th:if="${#fields.hasErrors('passwordAlumno')}"
+				th:errors="*{passwordAlumno}"></div>
+				
+				</div>
+				
+				<div class="form-group">
+				<label for="fechaAlumno">E-mail:</label> 
+				<input type="date"	th:field="*{fechaAlumno}"
+				class="form-control" id="fecha"></input>
+				<div class="alert alert-danger" 
+				th:if="${#fields.hasErrors('fechaAlumno')}"
+				th:errors="*{fechaAlumno}"></div>
+				
+				</div>
+				
+			</div>
+			<button type ="submit" class="btn btn-primary">Aceptar</button>
+			<a href="/alumno/listar" class="btn btn-danger">Cancelar</a>
+		</form>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

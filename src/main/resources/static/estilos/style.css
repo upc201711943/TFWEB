@@ -1,0 +1,59 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{
+	margin:0;
+	padding: 0;
+	box-sizing: border-box;
+}
+.barranav{
+	position: fixed;
+	z-index:1000;
+	width: 100%;
+}
+.contenido{
+	padding-top: 75px;
+	padding-bottom: 75px;
+}
+.logo{
+	width:50px;
+	height:10%;
+	margin:0px;
+	padding-right: 0px;
+}
+
+.fondo {
+	background-image: url("../images/imgs/fondo_salon.jpeg"); 
+	background-repeat: no-repeat;
+	background-size: cover;
+
+}
+.fondo1 {
+	background-image: url("../images/logo/logo.jpeg");
+	width:50%;
+	border-radius: 20px;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.cont{
+	background-color: white;
+	border-radius: 20px;
+}
+.univ img{
+	width:150px;
+	height:150px;
+	
+}
+.exam{
+	width: 250px;
+	height: 350px;
+	box-shadow: 10px 10px 15px;
+	
+}
+@media (max-width:576px) {
+.exam{
+	margin-left: 110px;
+	
+}
+
+}
