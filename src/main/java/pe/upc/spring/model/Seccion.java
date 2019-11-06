@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Seccion")
@@ -20,6 +22,11 @@ public class Seccion implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="idSeccion",nullable=false)
 	private int idSeccion;
+	
+	@NotEmpty(message="No puedo estar vacío")
+	@NotBlank(message="No puedo estar en blanco")
+	@Column(name="codigoSeccion", nullable=false)
+	private String codigoSeccion;
 	
 	@ManyToOne
 	@JoinColumn(name="idCurso",nullable=false)
@@ -36,12 +43,19 @@ public class Seccion implements Serializable{
 	}
 	
 
-	public Seccion(int idSeccion, Curso curso, Profesor profesor) {
+	
+
+
+	public Seccion(int idSeccion, String codigoSeccion,Curso curso, Profesor profesor) {
 		super();
 		this.idSeccion = idSeccion;
+		this.codigoSeccion = codigoSeccion;
 		this.curso = curso;
 		this.profesor = profesor;
 	}
+
+
+
 
 
 	public int getIdSeccion() {
@@ -67,4 +81,21 @@ public class Seccion implements Serializable{
 	public void setProfesor(Profesor profesor) {
 		this.profesor = profesor;
 	}
+
+
+
+
+
+	public String getCodigoSeccion() {
+		return codigoSeccion;
+	}
+
+
+
+
+
+	public void setCodigoSeccion(String codigoSeccion) {
+		this.codigoSeccion = codigoSeccion;
+	}
+	
 }

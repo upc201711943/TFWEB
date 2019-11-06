@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import pe.upc.spring.model.Curso;
-import pe.upc.spring.model.Profesor;
 import pe.upc.spring.model.Seccion;
 import pe.upc.spring.service.ICursoService;
 import pe.upc.spring.service.IProfesorService;

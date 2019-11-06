@@ -1,7 +1,6 @@
 package pe.upc.spring.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,15 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="Alumno")
@@ -32,7 +25,7 @@ public class Alumno implements Serializable{
 	
 	@NotEmpty(message="No puedo estar vacío")
 	@NotBlank(message="No puedo estar en blanco")
-	@Column(name="codigoAlumno", nullable=false)
+	@Column(name="codigoAlumno", nullable=false,length = 10)
 	private String codigoAlumno;
 
 	@NotEmpty(message="No puedo estar vacío")
@@ -56,19 +49,12 @@ public class Alumno implements Serializable{
 	@Column(name="passwordAlumno", nullable=false)
 	private String passwordAlumno;
 
-	@NotNull
-	@Past(message="No puedes seleccionar un día que todavía NO EXISTE")
-	@Temporal(TemporalType.DATE)
-	@Column(name="fechaAlumno",nullable=false)
-	@DateTimeFormat(pattern="yyy-MM-dd")
-	private Date fechaAlumno;
-
 	public Alumno() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Alumno(int idAlumno,String codigoAlumno,String nombreAlumno,String apellidoAlumno,String emailAlumno,String passwordAlumno,Date fechaAlumno) {
+	public Alumno(int idAlumno,String codigoAlumno,String nombreAlumno,String apellidoAlumno,String emailAlumno,String passwordAlumno) {
 		super();
 		this.idAlumno = idAlumno;
 		this.codigoAlumno = codigoAlumno;
@@ -76,7 +62,7 @@ public class Alumno implements Serializable{
 		this.apellidoAlumno = apellidoAlumno;
 		this.emailAlumno = emailAlumno;
 		this.passwordAlumno = passwordAlumno;
-		this.fechaAlumno = fechaAlumno;
+	
 	}
 
 	public int getIdAlumno() {
@@ -125,15 +111,6 @@ public class Alumno implements Serializable{
 
 	public void setPasswordAlumno(String passwordAlumno) {
 		this.passwordAlumno = passwordAlumno;
-	}
-
-	public Date getFechaAlumno() {
-		return fechaAlumno;
-	}
-
-	public void setFechaAlumno(Date fechaAlumno) {
-		this.fechaAlumno = fechaAlumno;
-	}
-		
+	}		
 	
 }

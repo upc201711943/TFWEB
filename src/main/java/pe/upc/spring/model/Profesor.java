@@ -53,23 +53,24 @@ public class Profesor implements Serializable{
 	@Column(name="telefonoProfesor",nullable=false)
 	private String telefonoProfesor;
 
+	@Column(name="notaProfesor",nullable=true)
+	private int notaProfesor;
+	
 	@NotEmpty(message="No puedo estar vacío")
 	@NotBlank(message="No puedo estar en blanco")
 	@Column(name="gradoProfesor",nullable=false)
 	private String gradoProfesor;
 
-	@NotEmpty(message="No puedo estar vacío")
-	@NotBlank(message="No puedo estar en blanco")
-	@Column(name="descripcionProfesor",nullable=false)
-	private String descripcionProfesor;
+	@Column(name="calificacionProfesor",nullable=true)
+	private float calificacionProfesor;
 
 	public Profesor() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Profesor(int idProfesor,String codigoProfesor,	String nombreProfesor,String apellidoProfesor,String emailProfesor,
-			String passwordProfesor,String telefonoProfesor,String gradoProfesor,String descripcionProfesor) {
+	public Profesor(int idProfesor,String codigoProfesor,String nombreProfesor,String apellidoProfesor,String emailProfesor,
+			String passwordProfesor,String telefonoProfesor,int notaProfesor,String gradoProfesor,float calificacionProfesor) {
 		super();
 		this.idProfesor = idProfesor;
 		this.codigoProfesor = codigoProfesor;
@@ -78,9 +79,11 @@ public class Profesor implements Serializable{
 		this.emailProfesor = emailProfesor;
 		this.passwordProfesor = passwordProfesor;
 		this.telefonoProfesor = telefonoProfesor;
+		this.notaProfesor = notaProfesor;
 		this.gradoProfesor = gradoProfesor;
-		this.descripcionProfesor = descripcionProfesor;
+		this.calificacionProfesor = calificacionProfesor;
 	}
+
 
 	public int getIdProfesor() {
 		return idProfesor;
@@ -146,14 +149,22 @@ public class Profesor implements Serializable{
 		this.gradoProfesor = gradoProfesor;
 	}
 
-	public String getDescripcionProfesor() {
-		return descripcionProfesor;
+	public int getNotaProfesor() {
+		return notaProfesor;
 	}
 
-	public void setDescripcionProfesor(String descripcionProfesor) {
-		this.descripcionProfesor = descripcionProfesor;
+	public void setNotaProfesor(int notaProfesor) {
+		this.notaProfesor = notaProfesor;
 	}
-	
+
+	public float getCalificacionProfesor() {
+		return calificacionProfesor;
+	}
+
+	public void setCalificacionProfesor(float calificacionProfesor) {
+		this.calificacionProfesor = calificacionProfesor;
+	}
+
 
 	
 }
