@@ -27,7 +27,7 @@
 				<label for="seccion">Seccion:</label> 
 				<select class="form-control" th:field="*{seccion.idSeccion}">
 					<option th:each="c: ${listaSeccion}" th:value="${c.idSeccion}" 
-					th:text="${c.idSeccion}"
+					th:text="${c.codigoSeccion}"
 					th:selected="(${c.idSeccion} == *{seccion.idSeccion})"></option> 		 
 				</select>
 				

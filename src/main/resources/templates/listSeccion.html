@@ -35,6 +35,7 @@
 						<thead>
 							<tr>
 								<th class="text-center">ID</th>
+								<th class="text-center">CÓDIGO</th>
 								<th class="text-center">CURSO</th>
 								<th class="text-center">PROFESOR</th>
 								<th class="text-center">OPERACIÓN</th>
@@ -45,6 +46,7 @@
 						<tbody>
 							<tr th:each="p: ${listaSeccion}">
 								<td th:text="${p.idSeccion}"></td>
+								<td th:text="${p.codigoSeccion}"></td>
 								<td th:text="${p.curso.nombreCurso}"></td>
 								<td th:text="${p.profesor.nombreProfesor}"></td>
 								<td><a th:href="@{/seccion/eliminar?id=}+${p.idSeccion}">Eliminar</a></td>

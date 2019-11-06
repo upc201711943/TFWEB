@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title>Material</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css"></link>
+
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" th:src="@{/js/material.js}"></script>
+
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+		<div class="container">
+		<form th:action="@{/material/registrar}" method="post"
+			th:object="${material}">
+			<div class="form-group">
+				<label for="idMaterial">ID:</label> 
+				<input type="text"  th:field="*{idMaterial}"></input>
+				
+				<div class="form-group">
+				<label for="nombreMaterial">Nombre:</label> 
+				<input type="text"	th:field="*{nombreMaterial}"
+				class="form-control" id="nombre"></input>
+				<div class="alert alert-danger" 
+				th:if="${#fields.hasErrors('nombreMaterial')}"
+				th:errors="*{nombreMaterial}"></div>
+				
+				</div>
+				<div class="form-group">
+				<label for="contenidoMaterial">Contenido:</label> 
+				<input type="text"	th:field="*{contenidoMaterial}"
+				class="form-control" id="contenido"></input>
+				<div class="alert alert-danger" 
+				th:if="${#fields.hasErrors('contenidoMaterial')}"
+				th:errors="*{contenidoMaterial}"></div>
+				
+				</div>
+				<div class="form-group">
+				<label for="tipoMaterial">Tipo Material:</label> 
+				<select class="form-control" th:field="*{tipoMaterial.idTipoMaterial}">
+					<option th:each="c: ${listaTipoMaterial}" th:value="${c.idTipoMaterial}" 
+					th:text="${c.nombreTipoMaterial}"
+					th:selected="(${c.idTipoMaterial} == *{tipoMaterial.idTipoMaterial})"></option> 		 
+				</select>				
+				
+				</div>
+				<div class="form-group">
+				<label for="disponibilidadMaterial">Disponibilidad:</label> <br>
+				<input type="radio" th:field="*{disponibilidadMaterial}"
+				id="disponibilidad" th:value="HABILITADO">Disponible<br>
+				<input type="radio" th:field="*{disponibilidadMaterial}"
+				id="disponibilidad" th:value="DESHABILITADO">No Disponible<br>
+				
+				
+				</div>
+				<div class="form-group">
+				<label for="seccion">Seccion:</label> 
+				<select class="form-control" th:field="*{seccion.idSeccion}">
+					<option th:each="c: ${listaSeccion}" th:value="${c.idSeccion}" 
+					th:text="${c.codigoSeccion}"
+					th:selected="(${c.idSeccion} == *{seccion.idSeccion})"></option> 		 
+				</select>
+				
+				</div>
+					
+			</div>
+			<button type ="submit" class="btn btn-primary">Aceptar</button>
+			<a href="/material/listar" class="btn btn-danger">Cancelar</a>
+		</form>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

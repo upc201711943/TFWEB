@@ -40,7 +40,6 @@
 								<th class="text-center">APELLIDO</th>
 								<th class="text-center">EMAIL</th>
 								<th class="text-center">PASSWORD</th>
-								<th class="text-center">FECHA</th>
 								<th class="text-center">OPERACIÓN</th>
 								<th class="text-center">OPERACIÓN</th>
 
@@ -54,7 +53,6 @@
 								<td th:text="${p.apellidoAlumno}"></td>
 								<td th:text="${p.emailAlumno}"></td>
 								<td th:text="${p.passwordAlumno}"></td>
-								<td th:text="${p.fechaAlumno}"></td>
 								<td><a th:href="@{/alumno/eliminar?id=}+${p.idAlumno}">Eliminar</a></td>
 								<td><a th:href="@{'/alumno/modificar/' + ${p.idAlumno}}">Modificar</a></td>
 							</tr>

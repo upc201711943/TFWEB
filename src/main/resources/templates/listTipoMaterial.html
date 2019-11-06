@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8"></meta>
-<title>Profesores</title>
+<title>Tipo Material</title>
 <script type="text/javascript"
 	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
 <link
@@ -14,17 +14,16 @@
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
-
-	<div class="container">
+<div class="container">
 		<form id="myform">
 			<div class="row clearfix">
 				<div class="col-md-12 column">
-					<a style="border-bottom-color: green" th:href="@{/profesor/irRegistrar}"
+					<a style="border-bottom-color: green" th:href="@{/tipoMaterial/irRegistrar}"
 						id="add-row" type="button"
 						class="btn btn-primary btn-md left-block"> <span
-						class="glyphicon glyphicon-plus"></span> Profesor
+						class="glyphicon glyphicon-plus"></span> Tipo Material
 					</a>
-					<a style="border-bottom-color: green" th:href="@{/profesor/irBuscar}"
+					<a style="border-bottom-color: green" th:href="@{/tipoMaterial/irBuscar}"
 						id="add-row" type="button"
 						class="btn btn-primary btn-md left-block"> <span
 						class="glyphicon glyphicon-search"></span> 
@@ -35,30 +34,20 @@
 						<thead>
 							<tr>
 								<th class="text-center">ID</th>
-								<th class="text-center">CÓDIGO</th>
 								<th class="text-center">NOMBRE</th>
-								<th class="text-center">APELLIDO</th>
-								<th class="text-center">EMAIL</th>
-								<th class="text-center">PASSWORD</th>
-								<th class="text-center">TELÉFONO</th>
-								<th class="text-center">GRADO</th>
+								<th class="text-center">PRECIO</th>
 								<th class="text-center">OPERACIÓN</th>
 								<th class="text-center">OPERACIÓN</th>
 
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="p: ${listaProfesor}">
-								<td th:text="${p.idProfesor}"></td>
-								<td th:text="${p.codigoProfesor}"></td>
-								<td th:text="${p.nombreProfesor}"></td>
-								<td th:text="${p.apellidoProfesor}"></td>
-								<td th:text="${p.emailProfesor}"></td>
-								<td th:text="${p.passwordProfesor}"></td>
-								<td th:text="${p.telefonoProfesor}"></td>
-								<td th:text="${p.gradoProfesor}"></td>
-								<td><a th:href="@{/profesor/eliminar?id=}+${p.idProfesor}">Eliminar</a></td>
-								<td><a th:href="@{'/profesor/modificar/' + ${p.idProfesor}}">Modificar</a></td>
+							<tr th:each="p: ${listaTipoMaterial}">
+								<td th:text="${p.idTipoMaterial}"></td>
+								<td th:text="${p.nombreTipoMaterial}"></td>
+								<td th:text="${p.precioTipoMaterial}"></td>
+								<td><a th:href="@{/tipoMaterial/eliminar?id=}+${p.idTipoMaterial}">Eliminar</a></td>
+								<td><a th:href="@{'/tipoMaterial/modificar/' + ${p.idTipoMaterial}}">Modificar</a></td>
 							</tr>
 						</tbody>
 
@@ -68,7 +57,6 @@
 			</div>
 		</form>
 	</div>
-
 	<div th:replace="fragments/footer :: footer"></div>
 
 </body>

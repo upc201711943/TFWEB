@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Listar Categorias</title>
+<script type="text/javascript"
+	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css"></link>
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+</head>
+<body>
+
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header  text-white bg-dark">Elige tu usuario :D</div>
+			<div class="card-body">
+					<a style="border-bottom-color: green" th:href="@{/inicio/alumno}"
+						id="add-row" type="button"
+						class="btn btn-primary btn-md left-block"> <span
+						class="glyphicon glyphicon-plus"></span> Alumno
+					</a>
+					<a style="border-bottom-color: green" th:href="@{/inicio/profesor}"
+						id="add-row" type="button"
+						class="btn btn-primary btn-md right-block"> <span
+						class="glyphicon glyphicon-plus"></span> Profesor
+					</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
