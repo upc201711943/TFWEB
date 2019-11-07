@@ -11,6 +11,8 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://kit.fontawesome.com/814638b048.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
@@ -23,11 +25,6 @@
 						id="add-row" type="button"
 						class="btn btn-primary btn-md left-block"> <span
 						class="glyphicon glyphicon-plus"></span> Matrícula
-					</a>
-					<a style="border-bottom-color: green" th:href="@{/matricula/irBuscar}"
-						id="add-row" type="button"
-						class="btn btn-primary btn-md left-block"> <span
-						class="glyphicon glyphicon-search"></span> 
 					</a>
 					
 					<table class="table table-bordered table-hover table-striped"
@@ -55,8 +52,8 @@
 								<td th:text="${p.seccion.profesor.apellidoProfesor}"></td>
 								<td th:text="${p.alumno.nombreAlumno}"></td>
 								<td th:text="${p.alumno.apellidoAlumno}"></td>
-								<td><a th:href="@{/matricula/eliminar?id=}+${p.idMatricula}">Eliminar</a></td>
-								<td><a th:href="@{'/matricula/modificar/' + ${p.idMatricula}}">Modificar</a></td>
+								<td align="center"><a type="button" class="btn btn-danger" th:href="@{/matricula/eliminar?id=}+${p.idMatricula}"><i class="fas fa-trash-alt"></i>	Eliminar</a></td>
+								<td align="center"><a type="button" class="btn btn-success" th:href="@{'/matricula/modificar/' + ${p.idMatricula}}"><i class="fas fa-edit"></i>	Modificar</a></td>
 							</tr>
 						</tbody>
 

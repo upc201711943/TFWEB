@@ -11,6 +11,8 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://kit.fontawesome.com/814638b048.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
@@ -24,11 +26,7 @@
 						class="btn btn-primary btn-md left-block"> <span
 						class="glyphicon glyphicon-plus"></span> Alumno
 					</a>
-					<a style="border-bottom-color: green" th:href="@{/alumno/irBuscar}"
-						id="add-row" type="button"
-						class="btn btn-primary btn-md left-block"> <span
-						class="glyphicon glyphicon-search"></span> 
-					</a>
+					
 					
 					<table class="table table-bordered table-hover table-striped"
 						id="tab_logic">
@@ -53,8 +51,8 @@
 								<td th:text="${p.apellidoAlumno}"></td>
 								<td th:text="${p.emailAlumno}"></td>
 								<td th:text="${p.passwordAlumno}"></td>
-								<td><a th:href="@{/alumno/eliminar?id=}+${p.idAlumno}">Eliminar</a></td>
-								<td><a th:href="@{'/alumno/modificar/' + ${p.idAlumno}}">Modificar</a></td>
+								<td align="center"><a type="button" class="btn btn-danger" th:href="@{/alumno/eliminar?id=}+${p.idAlumno}"><i class="fas fa-trash-alt"></i>	Eliminar</a></td>
+								<td align="center"><a type="button" class="btn btn-success" th:href="@{'/alumno/modificar/' + ${p.idAlumno}}"><i class="fas fa-edit"></i>	Modificar</a></td>
 							</tr>
 						</tbody>
 

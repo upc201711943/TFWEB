@@ -11,6 +11,7 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://kit.fontawesome.com/814638b048.js" crossorigin="anonymous"></script>
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
@@ -24,11 +25,6 @@
 						class="btn btn-primary btn-md left-block"> <span
 						class="glyphicon glyphicon-plus"></span> Material
 					</a>
-					<a style="border-bottom-color: green" th:href="@{/material/irBuscar}"
-						id="add-row" type="button"
-						class="btn btn-primary btn-md left-block"> <span
-						class="glyphicon glyphicon-search"></span> 
-					</a>
 					
 					<table class="table table-bordered table-hover table-striped"
 						id="tab_logic">
@@ -36,8 +32,8 @@
 							<tr>
 								<th class="text-center">ID</th>
 								<th class="text-center">NOMBRE</th>
-								<th class="text-center">TIPO MATERIAL</th>
 								<th class="text-center">CONTENIDO</th>
+								<th class="text-center">TIPO MATERIAL</th>
 								<th class="text-center">DISPONIBILIDAD</th>
 								<th class="text-center">PRECIO</th>
 								<th class="text-center">OPERACIÓN</th>
@@ -50,11 +46,11 @@
 								<td th:text="${p.idMaterial}"></td>
 								<td th:text="${p.nombreMaterial}"></td>
 								<td th:text="${p.contenidoMaterial}"></td>
-								<td th:text="${p.disponibilidadMaterial}"></td>								
 								<td th:text="${p.tipoMaterial.nombreTipoMaterial}"></td>
+								<td th:text="${p.disponibilidadMaterial}"></td>								
 								<td th:text="${p.tipoMaterial.precioTipoMaterial}"></td>
-								<td><a th:href="@{/material/eliminar?id=}+${p.idMaterial}">Eliminar</a></td>
-								<td><a th:href="@{'/material/modificar/' + ${p.idMaterial}}">Modificar</a></td>
+								<td align="center"><a type="button" class="btn btn-danger" th:href="@{/material/eliminar?id=}+${p.idMaterial}"><i class="fas fa-trash-alt"></i>	Eliminar</a></td>
+								<td align="center"><a type="button" class="btn btn-success" th:href="@{'/material/modificar/' + ${p.idMaterial}}"><i class="fas fa-edit"></i>	Modificar</a></td>
 							</tr>
 						</tbody>
 

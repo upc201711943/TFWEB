@@ -6,12 +6,11 @@
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css"></link>
 <link rel="stylesheet" th:href="//estilos/style.css">
-<script src="https://kit.fontawesome.com/814638b048.js" crossorigin="anonymous"></script>
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 </head>
 <body background="@{/images/imgs/fondo_salon.jpeg}">
-	<div th:fragment="header">
+	<div th:fragment="headerAlumno">
 		<!-- this is header -->
 		<nav class="navbar navbar-inverse" style="height:100px;">
 			<div class="container">
@@ -20,9 +19,6 @@
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav" style="margin-top:30px;margin-left:30px;">
-						<li class="active"><a th:href="@{/alumno/listar}">Alumno</a></li>
-						<li class="active"><a th:href="@{/profesor/listar}">Profesor</a></li>
-						<li class="active"><a th:href="@{/curso/listar}">Curso</a></li>
 						<li class="active"><a th:href="@{/seccion/listar}">Seccion</a></li>						
 						<li class="active"><a th:href="@{/matricula/listar}">Matricula</a></li>
 						<li class="active"><a th:href="@{/tipoAsesoria/listar}">Tipo Asesoria</a></li>

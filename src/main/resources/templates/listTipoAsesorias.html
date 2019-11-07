@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8"></meta>
-<title>Tipo Asesoria</title>
+<title>Tipo Asesoría</title>
 <script type="text/javascript"
 	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
 <link
@@ -11,6 +11,8 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://kit.fontawesome.com/814638b048.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
@@ -24,11 +26,7 @@
 						class="btn btn-primary btn-md left-block"> <span
 						class="glyphicon glyphicon-plus"></span> Tipo Asesoria
 					</a>
-					<a style="border-bottom-color: green" th:href="@{/tipoAsesoria/irBuscar}"
-						id="add-row" type="button"
-						class="btn btn-primary btn-md left-block"> <span
-						class="glyphicon glyphicon-search"></span> 
-					</a>
+					
 					
 					<table class="table table-bordered table-hover table-striped"
 						id="tab_logic">
@@ -47,8 +45,8 @@
 								<td th:text="${p.idTipoAsesoria}"></td>
 								<td th:text="${p.nombreTipoAsesoria}"></td>
 								<td th:text="${p.precioTipoAsesoria}"></td>
-								<td><a th:href="@{/tipoAsesoria/eliminar?id=}+${p.idTipoAsesoria}">Eliminar</a></td>
-								<td><a th:href="@{'/tipoAsesoria/modificar/' + ${p.idTipoAsesoria}}">Modificar</a></td>
+								<td align="center"><a type="button" class="btn btn-danger" th:href="@{/tipoAsesoria/eliminar?id=}+${p.idTipoAsesoria}"><i class="fas fa-trash-alt"></i>	Eliminar</a></td>
+								<td align="center"><a type="button" class="btn btn-success" th:href="@{'/tipoAsesoria/modificar/' + ${p.idTipoAsesoria}}"><i class="fas fa-edit"></i>	Modificar</a></td>
 							</tr>
 						</tbody>
 

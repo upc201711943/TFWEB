@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Class4u</title>
+    <!-- Bootstrap -->
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	  <link rel="stylesheet" th:href="@{/estilos/style.css}">
+	 <link rel="icon" type="image/png" href="/images/logo/iama.png">
+  </head>
+  <body>
+    <nav  class="navbar navbar-expand-lg navbar-dark bg-dark barranav">
+      <a class="navbar-brand" href="#"><img th:src="@{/images/logo/iama.png}" class="logo" alt=""></a>
+	   
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto text-center">
+          <li class="nav-item">
+            <a class="nav-link" href="#inicio">Inicio <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#nosotros">Nosotros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#productos">¿Qué ofrecemos?</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#empezar">Iniciar ahora</a>
+          </li>
+         
+		  </ul>
+      </div>
+    </nav>
+	  
+    <section id="inicio" class="contenido fondo">
+		  <div class="text-center">
+			<div class="container">
+			  <div class="row mt-5 mb-5">
+				  <div class="col-12 mb-5 text-white">
+				  <img th:src="@{/images/logo/logo.jpeg}" class="fondo1" alt="">
+				  </div>
+			  </div>
+			</div>
+		  </div>
+		
+    </section>
+    <section>
+      <div id="nosotros" class="container mt-5 contenido">
+        <div class="row">
+          <div class="col-12 text-center">
+            <h1>Nosotros</h1>
+            <p class="mt-4">Somos una plataforma creada por alumnos de la UPC para ayudar a los estudiantes universitarios a mejorar su rendimiento académico. Ofrecemos materiales académicos de las distintas universidades peruanas como las siguientes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container mt-2 mb-5">
+        <div class="row">
+          <div class="col-md-6 col-12 univ">
+            <ul class="list-unstyled">
+              <li class="media">
+                <img class="mr-3" th:src="@{/images/logo/pucp.jpg}" alt="Generic placeholder image">
+                <div class="media-body">
+                  <h5 class="mt-4 mb-1">PUCP</h5>
+                  Pontificia Universidad Católica del Perú
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-6 col-12 univ">
+            <ul class="list-unstyled">
+              <li class="media">
+                <img class="mr-3" th:src="@{/images/logo/UPC.png}" alt="Generic placeholder image">
+                <div class="media-body">
+                  <h5 class="mt-4 mb-1">UPC</h5>
+                  Universidad Peruana de Ciencias Aplicadas
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+	  <hr>
+    <section id="productos" class="contenido">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">
+            <h2>¿Qué ofrecemos?</h2>
+            <p  class="mt-4">Ofrecemos materiales de repaso para alumnos, profesores que les faciliten auditorías y otros materiales para reforzar las clases dependiendo de tu universidad</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-12 mt-5 mb-3 text-center univ">
+			 <h4>Exámenes, prácticas y controles</h4>
+          </div>
+          <div class="col-md-6 col-12 mt-5 text-center md-0 mb-3 univ">
+			  <h4>Auditorías con materiales únicos de nuestros profesores</h4>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-3 col-sm-6 col-12 mt-md-0 mt-sm-3 mt-5"><img class="img-fluid exam" th:src="@{/images/exams/upc.jpg}" alt=""></div>
+          <div class="col-md-3 col-sm-6 col-12 mt-md-0 mt-sm-3 mt-5"><img class="img-fluid exam" th:src="@{/images/exams/upc2.jpg}" alt=""></div>
+          <div class="col-md-3 col-sm-6 col-12 mt-md-0 mt-sm-3 mt-5"><img class="img-fluid exam" th:src="@{/images/exams/pucp.png}" alt=""></div>
+          <div class="col-md-3 col-sm-6 col-12 mt-md-0 mt-sm-3 mt-5"><img class="img-fluid exam" th:src="@{/images/exams/pucp2.png}" alt=""></div>
+        </div>
+      </div>
+    </section>
+	  <br>
+	  <br>
+    <hr>
+    <section id="empezar" class="contenido">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">
+            <h1>¿Listo para empezar a practicar?</h1>
+            <p  class="mt-4">Ya no tienes excusas con toda esta información al alcance de un click.</p>
+            <a type="button" class="btn btn-primary btn-md left-block" th:href="@{/login}">Iniciar ahora</a>
+          </div>
+        </div>
+      </div>
+    </section>
+	<br>
+	<footer class="text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <p>Copyright © Class4u. Todos los derechos reservados.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
