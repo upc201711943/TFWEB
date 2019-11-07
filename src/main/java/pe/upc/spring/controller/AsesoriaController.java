@@ -32,12 +32,7 @@ public class AsesoriaController {
 	private ISeccionService sService;
 	@Autowired
 	private ITipoAsesoriaService taService;
-	
-	@RequestMapping("/bienvenido")
-	public String irAsesoriaBienvenido() {
-		
-		return "bienvenido";
-	}
+
 	
 	@RequestMapping("/")
 	public String irAsesoria(Map<String, Object>model) {

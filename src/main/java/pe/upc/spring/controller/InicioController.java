@@ -26,6 +26,11 @@ public class InicioController {
 		
 		return "eleccion";
 	}
+	@RequestMapping("/index")
+	public String irIndex() {
+		
+		return "index";
+	}
 	
 	@RequestMapping("/alumno")
 	public String irAlumno(Model model) {

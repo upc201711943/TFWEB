@@ -44,8 +44,6 @@ public class SeccionController {
 		model.addAttribute("listaCursos", cService.listar());
 		model.addAttribute("listaProfesor", pService.listar());
 		model.addAttribute("seccion", new Seccion());
-		/*model.addAttribute("curso", new Curso());
-		model.addAttribute("profesor", new Profesor());*/
 		return "seccion";
 	}
 	

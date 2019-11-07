@@ -41,7 +41,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 					.antMatchers("/matricula/**").access("hasRole('ROLE_ADMIN') ")
 					
 					.antMatchers("/inicio/bienvenido").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_ALUMNO')").and()
-					.formLogin().successHandler(successHandler).loginPage("/login").loginProcessingUrl("/login").defaultSuccessUrl("/alumno/bienvenido")
+					.formLogin().successHandler(successHandler).loginPage("/login").loginProcessingUrl("/login").defaultSuccessUrl("/inicio/bienvenido")
 					.permitAll().and().logout().logoutSuccessUrl("/login").permitAll().and().exceptionHandling().accessDeniedPage("/error_403");
 
 		} catch (Exception e) {
