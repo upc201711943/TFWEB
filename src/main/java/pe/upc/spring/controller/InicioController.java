@@ -3,6 +3,7 @@ package pe.upc.spring.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -20,6 +21,16 @@ public class InicioController {
 		
 		return "bienvenido";
 	}
+	@RequestMapping("/bienvenidoAlumno")
+	public String irBienvenidoAlumno() {
+		
+		return "bienvenidoAlumno";
+	}
+	@RequestMapping("/bienvenidoProfesor")
+	public String irBienvenidoProfesor() {
+		
+		return "bienvenidoProfesor";
+	}
 	
 	@RequestMapping("/eleccion")
 	public String irEleccion() {
@@ -31,7 +42,12 @@ public class InicioController {
 		
 		return "index";
 	}
-	
+
+	@RequestMapping("/logout")
+	 public String irLogOut() {
+			
+			return "logout";
+		} 
 	@RequestMapping("/alumno")
 	public String irAlumno(Model model) {
 		return cAlumno.irRegistrar(model);

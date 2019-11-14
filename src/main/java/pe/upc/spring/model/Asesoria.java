@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name="Asesoria")
@@ -27,6 +28,7 @@ public class Asesoria implements Serializable{
 	@NotEmpty(message="No puedo estar vacío")
 	@NotBlank(message="No puedo estar en blanco")
 	@Column(name="nombreAsesoria", nullable=false)
+	@Pattern(regexp="^[ a-zA-ZÀ-ÿ\\u00f1\\u00d1]+(\\s*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]*)*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+$")
 	private String nombreAsesoria;
 	
 	@ManyToOne

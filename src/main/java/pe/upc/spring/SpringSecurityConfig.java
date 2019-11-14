@@ -26,11 +26,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-			
 		try {
 			http.authorizeRequests()
 
-					.antMatchers("/alumno/listar").access("hasRole('ROLE_ADMIN') ")
+					.antMatchers("/alumno/listar").access("hasRole('ROLE_ADMIN')")
 					.antMatchers("/profesor/listar").access("hasRole('ROLE_ADMIN')")
 					.antMatchers("/tipoMaterial/**").access("hasRole('ROLE_ADMIN') ")
 					.antMatchers("/tipoAsesoria/**").access("hasRole('ROLE_ADMIN')")
@@ -38,11 +37,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 					.antMatchers("/curso/**").access("hasRole('ROLE_ADMIN')")
 					.antMatchers("/asesoria/**").access("hasRole('ROLE_ADMIN') ")
 					.antMatchers("/material/**").access("hasRole('ROLE_ADMIN')")
-					.antMatchers("/matricula/**").access("hasRole('ROLE_ADMIN') ")
+					.antMatchers("/matricula/**").access("hasRole('ROLE_ALUMNO') or hasRole('ROLE_ADMIN')")
+
 					
-					.antMatchers("/inicio/bienvenido").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_ALUMNO')").and()
+					.antMatchers("/inicio/bienvenido").access("hasRole('ROLE_ADMIN')")
+					.antMatchers("/inicio/bienvenidoAlumno").access("hasRole('ROLE_ALUMNO')")
+					.antMatchers("/inicio/bienvenidoProfesor").access("hasRole('ROLE_PROFESOR')").and()
 					.formLogin().successHandler(successHandler).loginPage("/login").loginProcessingUrl("/login").defaultSuccessUrl("/inicio/bienvenido")
-					.permitAll().and().logout().logoutSuccessUrl("/login").permitAll().and().exceptionHandling().accessDeniedPage("/error_403");
+					.permitAll().and().logout().logoutUrl("/inicio/logout").logoutSuccessUrl("/inicio/index").permitAll().and().exceptionHandling().accessDeniedPage("/error_403");
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

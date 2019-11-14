@@ -10,6 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @SpringBootApplication
 public class ProyectoFinalApplication implements CommandLineRunner{
 
+	private String nuevaPassword;
+	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
@@ -44,5 +46,17 @@ public class ProyectoFinalApplication implements CommandLineRunner{
 		
 		
 	} 
+	
+	public String getNuevaPassword() {
+		return nuevaPassword;
+	}
+
+	public void setNuevaPassword(String nuevaPassword) {
+		this.nuevaPassword = nuevaPassword;
+	}
+
+	public String encriptar(String password) {
+		return passwordEncoder.encode(password);
+	}
 
 }

@@ -12,6 +12,7 @@ public interface IMatriculaService {
 	public Optional<Matricula> listarId(int idMatricula);
 	public Optional<Matricula> buscarId(int idMatricula);
 	public List<Matricula>listar();
-	/*public List<Matricula>buscarCurso(String nombreCurso);
-	public List<Matricula>buscarProfesor(String nombreProfesor);*/
+	public List<Matricula>listarAlumno(int idAlumno);
+	public List<Matricula>buscarAlumno(String codigoAlumno);
+	/*public List<Matricula>buscarProfesor(String nombreProfesor);*/
 }

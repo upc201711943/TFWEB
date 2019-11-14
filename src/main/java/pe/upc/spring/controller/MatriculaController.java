@@ -1,6 +1,7 @@
 package pe.upc.spring.controller;
 
 import java.text.ParseException;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import pe.upc.spring.model.Alumno;
 import pe.upc.spring.model.Matricula;
 import pe.upc.spring.service.IAlumnoService;
 import pe.upc.spring.service.IMatriculaService;
@@ -124,6 +126,20 @@ public class MatriculaController {
 		model.put("listaMatriculas", mService.listar());
 		return "listMatriculas";
 	}
+	@RequestMapping("/perfil")
+	public String listarMatriculasxAlumno(Map<String, Object>model,@ModelAttribute Alumno alumno) {
+		List<Matricula>listaMatriculas;
+		//matricula.setAlumno(matricula.getAlumno());
+		listaMatriculas=mService.buscarAlumno(alumno.getCodigoAlumno());
+		
+		if(listaMatriculas.isEmpty()) {
+			model.put("mensaje", "No se encontró");
+		}
+		model.put("listaMatriculas", listaMatriculas);
+		return "alumnoListMatriculas";
+
+	}
+	
 	@RequestMapping("/listarId")
 	public String listarId(Map<String, Object>model, @ModelAttribute Matricula matricula)
 	throws ParseException{
@@ -131,23 +147,33 @@ public class MatriculaController {
 		return "listMatriculas";
 	}
 	
-/*	@RequestMapping("/buscar")
-	public String buscar(Map<String, Object>model, @ModelAttribute Matricula matricula)
+	@RequestMapping("/buscar")
+	public String buscar(Map<String, Object>model, @ModelAttribute Alumno alumno)
 	throws ParseException{
 		List<Matricula>listaMatriculas;
-		matricula.setSeccion(matricula.getSeccion());
-		listaMatriculas=mService.buscarCurso(matricula.getSeccion().getCurso().getNombreCurso());
+		//matricula.setAlumno(matricula.getAlumno());
+		listaMatriculas=mService.buscarAlumno(alumno.getCodigoAlumno());
 		
 		if(listaMatriculas.isEmpty()) {
 			model.put("mensaje", "No se encontró");
 		}
-		model.put("listaMascotas", listaMatriculas);
-		return "buscar";
-	}*/
-	
-	@RequestMapping("/irBuscar")
-	public String irBuscar(Model model) {
-		model.addAttribute("pet",new Matricula());
+		model.put("listaMatriculas", listaMatriculas);
 		return "buscar";
 	}
+
+	@RequestMapping("/irBuscar")
+	public String irBuscar(Model model) {
+		model.addAttribute("alumno",new Alumno());
+		model.addAttribute("listaAlumnos",aService.listar());
+		return "buscar";
+	}
+	
+	@RequestMapping("/irPerfil")
+	public String irPerfil(Model model) {
+		model.addAttribute("alumno",new Alumno());
+		model.addAttribute("listaAlumnos",aService.listar());
+		return "alumnoListMatriculas";
+	}
+	
+	
 }

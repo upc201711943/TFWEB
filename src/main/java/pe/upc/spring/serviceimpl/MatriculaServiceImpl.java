@@ -60,13 +60,18 @@ public class MatriculaServiceImpl implements IMatriculaService{
 	public List<Matricula> listar(){
 		return dMatricula.findAll();
 	}
-	/*
+
 	@Override
 	@Transactional
-	public List<Matricula> buscarCurso(String nombreCurso){
-		return dMatricula.buscarCurso(nombreCurso);
+	public List<Matricula> listarAlumno(int idAlumno){
+		return dMatricula.listarAlumno(idAlumno);
 	}
-	
+	@Override
+	@Transactional
+	public List<Matricula> buscarAlumno(String codigoAlumno){
+		return dMatricula.buscarAlumno(codigoAlumno);
+	}
+	/*
 	@Override
 	@Transactional
 	public List<Matricula> buscarProfesor(String nombreProfesor){

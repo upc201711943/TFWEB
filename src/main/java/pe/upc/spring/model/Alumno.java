@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name="Alumno")
@@ -26,16 +27,19 @@ public class Alumno implements Serializable{
 	@NotEmpty(message="No puedo estar vacío")
 	@NotBlank(message="No puedo estar en blanco")
 	@Column(name="codigoAlumno", nullable=false,length = 10)
+	@Pattern(regexp="^[\\p{Alnum}]{1,10}$")
 	private String codigoAlumno;
 
 	@NotEmpty(message="No puedo estar vacío")
 	@NotBlank(message="No puedo estar en blanco")
 	@Column(name="nombreAlumno", nullable=false)
+	@Pattern(regexp="^[ a-zA-ZÀ-ÿ\\u00f1\\u00d1]+(\\s*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]*)*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+$")
 	private String nombreAlumno;
 	
 	@NotEmpty(message="No puedo estar vacío")
 	@NotBlank(message="No puedo estar en blanco")
 	@Column(name="apellidoAlumno",nullable=false)
+	@Pattern(regexp="^[ a-zA-ZÀ-ÿ\\u00f1\\u00d1]+(\\s*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]*)*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+$")
 	private String apellidoAlumno;
 
 	@Email

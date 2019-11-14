@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "Seccion")
@@ -26,6 +27,7 @@ public class Seccion implements Serializable{
 	@NotEmpty(message="No puedo estar vacío")
 	@NotBlank(message="No puedo estar en blanco")
 	@Column(name="codigoSeccion", nullable=false)
+	@Pattern(regexp="^[\\p{Alnum}]{1,10}$")
 	private String codigoSeccion;
 	
 	@ManyToOne

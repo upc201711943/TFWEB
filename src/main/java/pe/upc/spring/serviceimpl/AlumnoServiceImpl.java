@@ -26,8 +26,7 @@ public class AlumnoServiceImpl implements IAlumnoService{
 			return false;
 		else
 			return true;
-				
-	}
+			}
 	
 	@Override
 	@Transactional

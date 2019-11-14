@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -31,6 +32,11 @@ public class Usuario implements Serializable {
 	private String password;
 
 	private Boolean enabled;
+	
+	
+	private String rol;
+	
+	
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
@@ -46,6 +52,15 @@ public class Usuario implements Serializable {
 
 	public String getUsername() {
 		return username;
+	}
+
+	
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
 	}
 
 	public void setUsername(String username) {
