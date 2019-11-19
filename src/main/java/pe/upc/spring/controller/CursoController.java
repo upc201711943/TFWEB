@@ -1,6 +1,8 @@
 package pe.upc.spring.controller;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -102,5 +104,26 @@ public class CursoController {
 		}
 		return "listCursos";
 	}
+	@RequestMapping("/buscar")
+	public String buscar(Map<String, Object>model, @ModelAttribute Curso curso)
+	throws ParseException{
+		List<Curso>listaCurso=new ArrayList<Curso>();
+		listaCurso=cService.buscarCurso(curso.getNombreCurso().toUpperCase());
+		if(listaCurso.isEmpty()) {
+			model.put("mensaje", "No se encontró");
+		}
+		model.put("listaCursos", listaCurso);
+		return "profesorBuscarCurso";
+	}
 	
+	@RequestMapping("/irBuscar")
+	public String irBuscar(Model model) {
+		model.addAttribute("curso",new Curso());
+		return "profesorBuscarCurso";
+	}
+	@RequestMapping("/cursos")
+	public String cursos(Map<String, Object>model) {
+		model.put("listaCursos", cService.listar());
+		return "profesorListCursos";
+	}
 }

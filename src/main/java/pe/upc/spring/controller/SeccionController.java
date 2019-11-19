@@ -233,6 +233,64 @@ public class SeccionController {
 		
 		return "profesorListSeccion";
 	}
+	@RequestMapping("/añadir/{id}")
+	public String añadirCurso(@PathVariable int id,Model model, RedirectAttributes objRedir) 
+	throws ParseException{
+		Optional<Curso>objCurso=cService.buscarId(id);
+		List<Profesor> listaProfesor=pService.buscarCodigo("pcsieoca");
+		if(objCurso==null)
+			{
+			objRedir.addFlashAttribute("mensaje","Ocurrió un error");
+			return "redirect://seccion/cursos";
+			}
+		else {
+			model.addAttribute("listaCursos", objCurso);
+			model.addAttribute("listaProfesor", listaProfesor);
+			model.addAttribute("seccion", new Seccion());
+			if(objCurso.isPresent())
+			 objCurso.ifPresent( o-> model.addAttribute("listaCursos", o));
+			
+			return "profesorSeccion";
+		}
+		
+	}
+	@RequestMapping("/profesorIrRegistrar")
+	public String profesorIrRegistrar(Model model) {
+		model.addAttribute("listaCursos", cService.listar());
+		model.addAttribute("listaProfesor", pService.listar());
+		model.addAttribute("seccion", new Matricula());
+		return "seccion";
+	}
+	@RequestMapping("/profesorRegistrar")
+	public String profesorRegistrar(@ModelAttribute @Valid Seccion seccion, BindingResult binRes, Model model) 
+	throws ParseException{
+		if(binRes.hasErrors())
+		{
+			model.addAttribute("listaCursos", cService.listar());
+			model.addAttribute("listaProfesor", pService.listar());
+			return "seccion";
+			}
+		else {
+			boolean flag=validarSeccion(seccion);
+			
+			if(flag)
+				{
+				flag=sService.insertar(seccion);
+				if(flag)				
+					return "redirect:/seccion/perfil";
+				else {
+					model.addAttribute("mensaje", "Ya se encuentra registrado");
+					return "redirect:/curso/cursos";
+				}
+
+				}
+			else {
+				model.addAttribute("mensaje", "Ocurrió un error");
+				return "redirect:/curso/cursos";
+			}
+		}
+	}
+	
 	public boolean validarSeccion(Seccion seccion) {
 		boolean flag=true;
 		List<Seccion>lista=sService.listar();
