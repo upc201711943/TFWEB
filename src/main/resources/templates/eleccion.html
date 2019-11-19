@@ -5,12 +5,16 @@
 <title>Listar Categorias</title>
 <script type="text/javascript"
 	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
+  <link rel="stylesheet" th:href="@{/estilos/style.css}">
+	
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css"></link>
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://kit.fontawesome.com/814638b048.js" crossorigin="anonymous"></script>
+
 
 </head>
 <body>
@@ -19,18 +23,48 @@
 	<div class="container py-4">
 
 		<div class="card bg-light">
-			<div class="card-header  text-white bg-dark">Elige tu usuario :D</div>
+		
+			<div class="container" align="center" >
+			<div class="card-header  text-white bg-dark">
+			<h2>Elige tu tipo de usuario</h2></div>
+			</div>
+			<br>
 			<div class="card-body">
-					<a style="border-bottom-color: green" th:href="@{/inicio/alumno}"
+					<div class="row mt-2">
+			          <div class="col-md-4 col-sm-4 col-12 mt-md-0 mt-sm-3 mt-5"><img class="img-fluid user" th:src="@{/images/usuarios/alumnos.jpg}" alt="">
+					
+			        	<br>
+			        	<div align="center" class="mt-5">
+			        	<a style="border-bottom-color: green" th:href="@{/inicio/bienvenidoAlumno}"
 						id="add-row" type="button"
-						class="btn btn-primary btn-md left-block"> <span
-						class="glyphicon glyphicon-plus"></span> Alumno
-					</a>
-					<a style="border-bottom-color: green" th:href="@{/inicio/profesor}"
+						class="btn btn-success btn-md left-block"> <i class="fas fa-user-friends"></i>	Alumno
+					</a>  
+						</div>
+			          </div>
+			          
+			          <div class="col-md-4 col-sm-4 col-12 mt-md-0 mt-sm-3 mt-5"><img class="img-fluid user" th:src="@{/images/usuarios/profesores.jpg}" alt="">
+			        <br>
+			        <div align="center">
+			        	<a style="border-bottom-color: green" th:href="@{/inicio/bienvenidoProfesor}"
 						id="add-row" type="button"
-						class="btn btn-primary btn-md right-block"> <span
-						class="glyphicon glyphicon-plus"></span> Profesor
+						class="btn btn-warning btn-md right-block"><i class="fas fa-user-graduate"></i>	Profesor
 					</a>
+					  </div>
+			          </div>
+			          <div class="col-md-4 col-sm-4 col-12 mt-md-0 mt-sm-3 mt-5"><img class="img-fluid user" th:src="@{/images/usuarios/admin.jpg}" alt="">
+					<br>
+					<div align="center">
+			        	<a style="border-bottom-color: green" th:href="@{/inicio/bienvenido}"
+						id="add-row" type="button"
+						class="btn btn-primary btn-md right-block"><i class="fas fa-users-cog"></i>	Admin
+					</a>
+			          </div>
+			          </div>
+			        </div>
+					
+					
+					
+					
 			</div>
 		</div>
 	</div>

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8"></meta>
-<title>Secciones</title>
+<title>Buscar Raza</title>
 <script type="text/javascript"
 	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
 <link
@@ -12,23 +12,28 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="https://kit.fontawesome.com/814638b048.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 	<div th:replace="fragments/headerAlumno :: headerAlumno"></div>
-
 	<div class="container">
-		<form id="myform">
-			<div class="row clearfix">
-				<div class="col-md-12 column">
-					<a style="border-bottom-color: green" th:href="@{/seccion/irBuscar}"
-						id="add-row" type="button"
-						class="btn btn-primary btn-md left-block"> <span
-						class="glyphicon glyphicon-search"></span> Buscar
-					</a>
-					
-					<table class="table table-bordered table-hover table-striped"
-						id="tab_logic">
-						<thead>
+		<form th:action="@{/seccion/buscar}" method="post" th:object="${seccion}">
+
+			
+			<div class="form-group">
+				<label for="nombreCurso">Codigo:</label> 
+				<input type="text"	th:field="*{curso.nombreCurso}"
+				class="form-control" id="nombreCurso"></input>
+				<div class="alert alert-danger" 
+				th:if="${#fields.hasErrors('curso.nombreCurso')}"
+				th:errors="*{curso.nombreCurso}"></div>
+			</div>
+			<button type="submit" class="btn btn-primary">Buscar Curso</button>
+		</form>
+
+		<table class="table table-bordered table-hover table-striped"
+			id="tab_logic">
+			<thead>
 							<tr>
 								<th class="text-center">ID</th>
 								<th class="text-center">CÓDIGO</th>
@@ -36,7 +41,6 @@
 								<th class="text-center">NOMBRE PROFESOR</th>
 								<th class="text-center">APELLIDO PROFESOR</th>
 								<th class="text-center">OPERACIÓN</th>
-
 							</tr>
 						</thead>
 						<tbody>
@@ -49,14 +53,13 @@
 								<td align="center"><a th:href="@{'/matricula/añadir/' + ${p.idSeccion}}" class="btn btn-success"><i class="fas fa-plus-square"></i>	Elegir</a></td>
 							</tr>
 						</tbody>
+		</table>
 
-					</table>
 
-				</div>
-			</div>
-		</form>
+		<div th:if="${mensaje}" class="alert alert-info">
+			<p th:text="${mensaje}"></p>
+		</div>
 	</div>
-
 	<div th:replace="fragments/footer :: footer"></div>
 
 </body>

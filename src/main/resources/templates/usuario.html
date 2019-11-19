@@ -19,14 +19,14 @@
 	<div class="container py-4">
 
 		<div class="card bg-light">
-			<div class="card-header  text-white bg-dark">Sign In!</div>
+			<div class="card-header  text-white bg-dark">Forma parte de nuestra comunidad!</div>
 			<div class="card-body">
 
 				<form th:action="@{/usuario/registrar}" method="post"
 			th:object="${usuario}">
 			<div class="form-group">
-				<label for="idUsuario">ID:</label> 
-				<input type="text" th:field="*{idUsuario}"></input>
+				<label for="id">ID:</label> 
+				<input type="text" th:field="*{id}"></input>
 				
 				<div class="form-group">
 				<label for="username">Username:</label> 
@@ -47,11 +47,22 @@
 				th:errors="*{password}"></div>
 				
 				</div>
+				<div class="form-group">
+				<label for="rol">Rol:</label> 
+				<select class="form-control" th:field="*{rol}" id="rol">
+					<option th:value="ADMIN" th:text="ADMIN"/>
+					<option th:value="ALUMNO" th:text="ALUMNO"/>
+					<option th:value="PROFESOR" th:text="PROFESOR"/>
+				</select>
+				<div class="alert alert-danger" 
+				th:if="${#fields.hasErrors('rol')}"
+				th:errors="*{rol}"></div>
+				</div>
 				
 				</div>
 				<div class="form-group">
 				<label><input type="checkbox" th:field="*{enabled}" id="disponibilidad" 
-				name="cb-terminosservicio" th:value="${enabled}.prop(enabled,true)" required> Acepto los términos del servicio</label>
+				name="cb-terminosservicio" th:value="true" required> Acepto los términos del servicio</label>
 				<br>
 			</div>
 			<button type ="submit" class="btn btn-primary">Aceptar</button>

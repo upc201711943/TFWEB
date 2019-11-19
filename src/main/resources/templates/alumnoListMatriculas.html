@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Perfil</title>
+<script type="text/javascript"
+	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css"></link>
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://kit.fontawesome.com/814638b048.js" crossorigin="anonymous"></script>
+
+</head>
+<body background="@{/images/fondos/fondo_salon.jpeg}">
+	<div th:replace="fragments/headerAlumno :: headerAlumno"></div>
+	<div class="container">
+		<form th:action="@{/matricula/perfil}" method="post">
+			
+			<div class="card-header text-white bg-dark" align="center" >
+			<img alt="" th:src="@{/images/perfil/perfil.jpg}" style="border-radius:100%;width:125px; height:125px;">
+			<br>
+			<br>
+			<div>
+			<label for="codigoAlumno">Código:</label>
+			<label id="nombreAlumno">U201711943</label>		
+			</div>
+			<div>
+			<label for="nombreAlumno">Nombre:</label>
+			<label id="nombreAlumno">ALVARO ARTURO</label>
+			</div>
+			<div>
+			<label for="nombreAlumno">Apellido:</label>
+			<label id="nombreAlumno">MANRIQUE LUA</label>
+			</div>
+			
+			</div>
+		<br>
+		<h1>Mis Cursos</h1>
+			<button type="submit" class="btn btn-primary" style="width:18%;"></button>
+		</form>
+		<br>
+		<table class="table table-bordered table-hover table-striped"
+			id="tab_logic">
+			<thead>
+							<tr>
+								<th class="text-center">CÓDIGO SECCION</th>
+								<th class="text-center">NOMBRE CURSO</th>
+								<th class="text-center">OPERACIÓN</th>
+								<th class="text-center">OPERACIÓN</th>
+								<th class="text-center">OPERACIÓN</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="p: ${listaMatriculas}">
+								<td th:text="${p.seccion.codigoSeccion}"></td>
+								<td th:text="${p.seccion.curso.nombreCurso}"></td>
+								<td align="center"><a th:href="@{'/matricula/buscarMaterial/' + ${p.idMatricula}}" class="btn btn-primary"><i class="fas fa-scroll"></i>	Ver Materiales</a></td>
+								<td align="center"><a th:href="@{'/matricula/buscarAsesoria/' + ${p.idMatricula}}" class="btn btn-success"><i class="fas fa-chalkboard-teacher"></i>	Ver Asesorias</a></td>
+								<td align="center"><a type="button" class="btn btn-danger" th:href="@{/matricula/alumnoEliminar?id=}+${p.idMatricula}"><i class="fas fa-trash-alt"></i>	Eliminar</a></td>
+			
+							</tr>
+						</tbody>
+		</table>
+
+
+		<div th:if="${mensaje}" class="alert alert-info">
+			<p th:text="${mensaje}"></p>
+		</div>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

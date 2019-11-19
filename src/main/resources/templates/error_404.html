@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
 <meta charset="UTF-8"></meta>
-<title>Error</title>
+<title>PetShop</title>
 <script type="text/javascript"
 	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
 <link
@@ -15,23 +14,18 @@
 </head>
 <body>
 
-	<div th:replace="fragments/header :: header"></div>
-
-	<div class="container py-4">
-
-		<div class="card bg-danger text-white">
-			<div class="card-header">Error:Access denied!</div>
-			<div class="card-body">
-				<h5 class="card-title">
-					Sorry <span th:text="${authentication.name}"></span>, NOT have
-					permissions to access this resource.
-				</h5>
-				
-
+	<div class="container">
+		<form id="myform">
+			<div class="row clearfix">
+				<div class="col-md-12 column" align="center">
+					<h1>USTED NO TIENE PERMISOS PARA ACCEDER A ESTA PÁGINA</h1>
+					<img th:src="@{/images/error/error.png}" width="60%" height="600" alt="logo" align="middle"></img>
+					
+				</div>
 			</div>
-		</div>
+		</form>
 	</div>
+	<div th:replace="fragments/footer :: footer"></div>
 
-	
 </body>
 </html>

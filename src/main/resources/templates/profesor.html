@@ -22,9 +22,9 @@
 				<input type="text"	th:field="*{idProfesor}"></input>
 				
 				<div class="form-group">
-				<label for="codigoProfesor">Código:</label> 
+				<label for="codigoProfesor">Codigo:</label> 
 				<input type="text"	th:field="*{codigoProfesor}"
-				class="form-control" id="codigo"></input>
+				class="form-control" id="codigo" maxlength="10"></input>
 				<div class="alert alert-danger" 
 				th:if="${#fields.hasErrors('codigoProfesor')}"
 				th:errors="*{codigoProfesor}"></div>
@@ -63,7 +63,7 @@
 				
 				<div class="form-group">
 				<label for="passwordProfesor">Password:</label> 
-				<input type="password"	th:field="*{passwordProfesor}"
+				<input type="text"	th:field="*{passwordProfesor}"
 				class="form-control" id="password"></input>
 				<div class="alert alert-danger" 
 				th:if="${#fields.hasErrors('passwordProfesor')}"
@@ -72,7 +72,7 @@
 				</div>
 					
 				<div class="form-group">
-				<label for="telefonoProfesor">Teléfono:</label> 
+				<label for="telefonoProfesor">Telefono:</label> 
 				<input type="text"	th:field="*{telefonoProfesor}"
 				class="form-control" id="telefono"></input>
 				<div class="alert alert-danger" 

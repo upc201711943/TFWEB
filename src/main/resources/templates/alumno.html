@@ -27,7 +27,7 @@
 				<input type="text" th:field="*{idAlumno}"></input>
 				
 				<div class="form-group">
-				<label for="codigoAlumno">Código:</label> 
+				<label for="codigoAlumno">Codigo:</label> 
 				<input type="text"	th:field="*{codigoAlumno}"
 				class="form-control" id="codigo" maxlength="10"></input>
 				<div class="alert alert-danger" 
@@ -68,7 +68,7 @@
 				
 				<div class="form-group">
 				<label for="passwordAlumno">Password:</label> 
-				<input type="password"	th:field="*{passwordAlumno}"
+				<input type="text"	th:field="*{passwordAlumno}"
 				class="form-control" id="password"></input>
 				<div class="alert alert-danger" 
 				th:if="${#fields.hasErrors('passwordAlumno')}"
