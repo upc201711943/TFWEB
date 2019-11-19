@@ -42,11 +42,41 @@ public class InicioController {
 		
 		return "index";
 	}
+	@RequestMapping("/login")
+	public String irLogin() {
+		
+		return "login";
+	}
+	@RequestMapping("/error_404")
+	public String irError() {
+		
+		return "error_404";
+	}
 
 	@RequestMapping("/logout")
 	 public String irLogOut() {
 			
 			return "logout";
+		} 
+	@RequestMapping("/logoutAlumno")
+	 public String irLogOutAlumno() {
+			
+			return "logoutAlumno";
+		} 
+	@RequestMapping("/logoutProfesor")
+	 public String irLogOutProfesor() {
+			
+			return "logoutProfesor";
+		} 
+	@RequestMapping("/loginAlumno")
+	 public String irLoginAlumno() {
+			
+			return "logoutAlumno";
+		} 
+	@RequestMapping("/loginProfesor")
+	 public String irLoginProfesor() {
+			
+			return "loginProfesor";
 		} 
 	@RequestMapping("/alumno")
 	public String irAlumno(Model model) {
