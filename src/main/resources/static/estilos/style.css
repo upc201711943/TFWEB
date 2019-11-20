@@ -50,10 +50,28 @@
 	box-shadow: 10px 10px 15px;
 	
 }
+.user{
+	width: 350px;
+	height: 250px;
+	box-shadow: 10px 10px 10px;
+	margin-bottom: 20px;
+	
+}
+.placeholder{
+	width: 350px;
+	height: 250px;
+	box-shadow: 10px 10px 15px;
+	
+}
 @media (max-width:576px) {
 .exam{
 	margin-left: 110px;
 	
 }
-
+.user{
+	width: 175px;
+	height: 125px;
+	box-shadow: 10px 10px 10px;
+	
+}
 }
