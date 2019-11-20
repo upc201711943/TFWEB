@@ -20,7 +20,11 @@
 		<form id="myform">
 			<div class="row clearfix">
 				<div class="col-md-12 column">
-									
+						<a style="border-bottom-color: green" th:href="@{'/material/irProfesorMaterial/' + ${seccion.idSeccion}}"
+						id="add-row" type="button"
+						class="btn btn-primary btn-md left-block"> <span
+						class="glyphicon glyphicon-plus"></span> Material
+					</a>
 					<table class="table table-bordered table-hover table-striped"
 						id="tab_logic">
 						<thead>
@@ -31,6 +35,8 @@
 								<th class="text-center">TIPO MATERIAL</th>
 								<th class="text-center">DISPONIBILIDAD</th>
 								<th class="text-center">PRECIO</th>
+								<th class="text-center">OPERACIÓN</th>
+								<th class="text-center">OPERACIÓN</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -41,6 +47,9 @@
 								<td th:text="${p.tipoMaterial.nombreTipoMaterial}"></td>
 								<td th:text="${p.disponibilidadMaterial}"></td>								
 								<td th:text="${p.tipoMaterial.precioTipoMaterial}"></td>
+								<td align="center"><a type="button" class="btn btn-danger" th:href="@{/material/profesorEliminar?id=}+${p.idMaterial}"><i class="fas fa-trash-alt"></i>	Eliminar</a></td>
+								<td align="center"><a type="button" class="btn btn-success" th:href="@{'/material/profesorModificar/' + ${p.idMaterial}}"><i class="fas fa-edit"></i>	Modificar</a></td>
+								
 							</tr>
 						</tbody>
 

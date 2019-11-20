@@ -47,7 +47,9 @@
 						</tbody>
 
 					</table>
-
+					<div th:if="${mensaje}" class="alert alert-info">
+						<p th:text="${mensaje}"></p>
+					</div>
 				</div>
 			</div>
 		</form>

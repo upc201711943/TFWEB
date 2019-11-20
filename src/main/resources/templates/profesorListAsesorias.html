@@ -21,6 +21,11 @@
 		<form id="myform">
 			<div class="row clearfix">
 				<div class="col-md-12 column">
+					<a style="border-bottom-color: green" th:href="@{'/asesoria/irProfesorAsesoria/' + ${seccion.idSeccion}}"
+						id="add-row" type="button"
+						class="btn btn-primary btn-md left-block"> <span
+						class="glyphicon glyphicon-plus"></span> Asesoria
+					</a>
 								
 					<table class="table table-bordered table-hover table-striped"
 						id="tab_logic">
@@ -30,7 +35,8 @@
 								<th class="text-center">NOMBRE</th>
 								<th class="text-center">TIPO ASESORIA</th>
 								<th class="text-center">PRECIO</th>
-							
+								<th class="text-center">OPERACIÓN</th>
+								<th class="text-center">OPERACIÓN</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -39,6 +45,9 @@
 								<td th:text="${p.nombreAsesoria}"></td>
 								<td th:text="${p.tipoAsesoria.nombreTipoAsesoria}"></td>
 								<td th:text="${p.tipoAsesoria.precioTipoAsesoria}"></td>
+								<td align="center"><a type="button" class="btn btn-danger" th:href="@{/asesoria/profesorEliminar?id=}+${p.idAsesoria}"><i class="fas fa-trash-alt"></i>	Eliminar</a></td>
+								<td align="center"><a type="button" class="btn btn-success" th:href="@{'/asesoria/profesorModificar/' + ${p.idAsesoria}}"><i class="fas fa-edit"></i>	Modificar</a></td>
+								
 							</tr>
 						</tbody>
 
