@@ -20,17 +20,16 @@
 		<form id="myform">
 			<div class="row clearfix">
 				<div class="col-md-12 column">
-									
+					<h1 th:text="${seccion.codigoSeccion}" class="text-primary"></h1>				
 					<table class="table table-bordered table-hover table-striped"
 						id="tab_logic">
-						<thead>
+						<thead class="">
 							<tr>
 								<th class="text-center">ID</th>
 								<th class="text-center">NOMBRE</th>
 								<th class="text-center">CONTENIDO</th>
-								<th class="text-center">TIPO MATERIAL</th>
+								<th class="text-center">URL</th>
 								<th class="text-center">DISPONIBILIDAD</th>
-								<th class="text-center">PRECIO</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -38,14 +37,15 @@
 								<td th:text="${p.idMaterial}"></td>
 								<td th:text="${p.nombreMaterial}"></td>
 								<td th:text="${p.contenidoMaterial}"></td>
-								<td th:text="${p.tipoMaterial.nombreTipoMaterial}"></td>
+								<td th:text="${p.urlMaterial}"></td>
 								<td th:text="${p.disponibilidadMaterial}"></td>								
-								<td th:text="${p.tipoMaterial.precioTipoMaterial}"></td>
 							</tr>
 						</tbody>
-
+					
 					</table>
-
+					<div align="center">
+					<a th:href="@{'/matricula/boletaMaterial/' + ${matricula.idMatricula}}" class="btn btn-success"> COTIZAR</a>
+				</div>	
 				</div>
 			</div>
 		</form>

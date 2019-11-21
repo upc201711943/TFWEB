@@ -41,6 +41,15 @@
 				
 				</div>
 				<div class="form-group">
+				<label for="urlMaterial">Link del material (URL):</label> 
+				<input type="text"	th:field="*{urlMaterial}"
+				class="form-control" id="url"></input>
+				<div class="alert alert-danger" 
+				th:if="${#fields.hasErrors('urlMaterial')}"
+				th:errors="*{urlMaterial}"></div>
+				
+				</div>
+				<div class="form-group">
 				<label for="tipoMaterial">Tipo Material:</label> 
 				<select class="form-control" th:field="*{tipoMaterial.idTipoMaterial}">
 					<option th:each="c: ${listaTipoMaterial}" th:value="${c.idTipoMaterial}" 
@@ -70,7 +79,7 @@
 					
 			</div>
 			<button type ="submit" class="btn btn-primary">Aceptar</button>
-			<a href="/material/listar" class="btn btn-danger">Cancelar</a>
+			<a href="/material/back" class="btn btn-danger">Cancelar</a>
 		</form>
 	</div>
 	<div th:replace="fragments/footer :: footer"></div>

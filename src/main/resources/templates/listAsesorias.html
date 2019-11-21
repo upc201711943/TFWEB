@@ -35,6 +35,8 @@
 								<th class="text-center">ID</th>
 								<th class="text-center">NOMBRE</th>
 								<th class="text-center">TIPO ASESORIA</th>
+								<th class="text-center">URL</th>
+								<th class="text-center">DISPONIBILIDAD</th>
 								<th class="text-center">PRECIO</th>
 								<th class="text-center">OPERACIÓN</th>
 								<th class="text-center">OPERACIÓN</th>
@@ -46,6 +48,8 @@
 								<td th:text="${p.idAsesoria}"></td>
 								<td th:text="${p.nombreAsesoria}"></td>
 								<td th:text="${p.tipoAsesoria.nombreTipoAsesoria}"></td>
+								<td th:text="${p.urlAsesoria}"></td>
+								<td th:text="${p.disponibilidadAsesoria}"></td>
 								<td th:text="${p.tipoAsesoria.precioTipoAsesoria}"></td>
 								<td align="center"><a type="button" class="btn btn-danger" th:href="@{/asesoria/eliminar?id=}+${p.idAsesoria}"><i class="fas fa-trash-alt"></i>	Eliminar</a></td>
 								<td align="center"><a type="button" class="btn btn-success" th:href="@{'/asesoria/modificar/' + ${p.idAsesoria}}"><i class="fas fa-edit"></i>	Modificar</a></td>

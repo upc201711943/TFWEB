@@ -31,6 +31,24 @@
 				th:errors="*{nombreAsesoria}"></div>
 				
 				</div>
+				
+				<div class="form-group">
+				<label for="urlAsesoria">Link de la Asesoría (URL):</label> 
+				<input type="text"	th:field="*{urlAsesoria}"
+				class="form-control" id="url"></input>
+				<div class="alert alert-danger" 
+				th:if="${#fields.hasErrors('urlAsesoria')}"
+				th:errors="*{urlAsesoria}"></div>
+				
+				</div>
+				<div class="form-group">
+				<label for="disponibilidadAsesoria">Disponibilidad:</label> <br>
+				<input type="radio" th:field="*{disponibilidadAsesoria}"
+				id="disponibilidad" th:value="HABILITADO">Disponible<br>
+				<input type="radio" th:field="*{disponibilidadAsesoria}"
+				id="disponibilidad" th:value="DESHABILITADO">No Disponible<br>
+				
+				</div>
 				<div class="form-group">
 				<label for="tipoAsesoria">Tipo Asesoria:</label> 
 				<select class="form-control" th:field="*{tipoAsesoria.idTipoAsesoria}">

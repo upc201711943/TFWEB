@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8"></meta>
-<title>Asesorías</title>
+<title>Boleta</title>
 <script type="text/javascript"
 	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
 <link
@@ -12,7 +12,6 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="https://kit.fontawesome.com/814638b048.js" crossorigin="anonymous"></script>
-
 </head>
 <body>
 	<div th:replace="fragments/headerAlumno :: headerAlumno"></div>
@@ -21,30 +20,46 @@
 		<form id="myform">
 			<div class="row clearfix">
 				<div class="col-md-12 column">
-				<h1 th:text="${seccion.codigoSeccion}" class="text-primary"></h1>
+				<h1 class="text-primary">BOLETA</h1>
 					<table class="table table-bordered table-hover table-striped"
 						id="tab_logic">
-						<thead>
+						<thead class="">
 							<tr>
 								<th class="text-center">ID</th>
 								<th class="text-center">NOMBRE</th>
-								<th class="text-center">URL</th>
-								<th class="text-center">DISPONIBILIDAD</th>							
+								<th class="text-center">DISPONIBILIDAD</th>
+								<th class="text-center">TIPO MATERIAL</th>
+								<th class="text-center">PRECIO</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="p: ${listaAsesorias}">
-								<td th:text="${p.idAsesoria}"></td>
-								<td th:text="${p.nombreAsesoria}"></td>
-								<td th:text="${p.urlAsesoria}"></td>
-								<td th:text="${p.disponibilidadAsesoria}"></td>
+							<tr th:each="p: ${listaMaterial}">
+								<td th:text="${p.idMaterial}"></td>
+								<td th:text="${p.nombreMaterial}"></td>
+								<td th:text="${p.disponibilidadMaterial}"></td>
+								<td th:text="${p.tipoMaterial.nombreTipoMaterial}"></td>								
+								<td th:text="${p.tipoMaterial.precioTipoMaterial}"></td>
 							</tr>
 						</tbody>
-
+					
 					</table>
-					<div align="center">
-					<a th:href="@{'/matricula/boletaAsesoria/' + ${matricula.idMatricula}}" class="btn btn-success"> COTIZAR</a>
-				</div>	
+				
+				</div>
+				<div>
+			<div class="col-md-4 col-12">
+					<label for="total">TOTAL HABILITADO (S/.): </label>
+					<p id="total" th:text="${totalHabilitado}"></p>
+				</div>
+			<div class="col-md-4 col-12">
+					<label for="total">TOTAL NO HABILITADO (S/.): </label>
+					<p id="total" th:text="${totalNoHabilitado}"></p>
+				</div>
+			
+			
+			<div class="col-md-4 col-12">
+					<label for="total">TOTAL (S/.): </label>
+					<p id="total" th:text="${total}"></p>
+				</div>
 				</div>
 			</div>
 		</form>
