@@ -44,6 +44,11 @@ public class MatriculaController {
 	@Autowired
 	private IMaterialService maService;
 	
+	private List<Material>listaM;
+	MatriculaController(){
+		listaM=new ArrayList<>();
+	} 
+	
 	@RequestMapping("/")
 	public String irRegistrar(Map<String, Object>model) {
 		model.put("listaMatriculas", mService.listar());
@@ -319,6 +324,8 @@ public class MatriculaController {
 			}
 		else {
 			seccion=verSeccion(objMatricula.get());
+			model.addAttribute("matricula", objMatricula.get());
+			model.addAttribute("seccion", seccion);
 			model.addAttribute("listaMaterial", listarMaterial(seccion));
 			return "alumnoListMaterial";
 		}
@@ -335,10 +342,172 @@ public class MatriculaController {
 			}
 		else {
 			seccion=verSeccion(objMatricula.get());
+			model.addAttribute("matricula", objMatricula.get());
+			model.addAttribute("seccion", seccion);
 			model.addAttribute("listaAsesorias", listarAsesoria(seccion));
 			return "alumnoListAsesorias";
 		}
 	}
+	
+	@RequestMapping("/boletaMaterial/{id}")
+	public String boletaMaterial(@PathVariable int id,Model model, RedirectAttributes objRedir) 
+	throws ParseException{
+		Optional<Matricula>objMatricula=mService.buscarId(id);
+		Seccion seccion=new Seccion();
+		double total=0;
+		double totalHabilitado=0;
+		double totalNoHabilitado=0;
+		if(objMatricula==null)
+			{
+			objRedir.addFlashAttribute("mensaje","Ocurrió un error");
+			return "redirect://matricula/irPerfil";
+			}
+		else {
+
+			seccion=verSeccion(objMatricula.get());
+			total=obtenerTotalMaterial(listarMaterial(seccion));
+			totalHabilitado=obtenerTotalHabilitadoMaterial(listarMaterial(seccion));
+			totalNoHabilitado=obtenerTotalNoHabilitadoMaterial(listarMaterial(seccion));
+			model.addAttribute("total", total);
+			model.addAttribute("totalHabilitado", totalHabilitado);
+			model.addAttribute("totalNoHabilitado", totalNoHabilitado);
+			model.addAttribute("matricula", objMatricula.get());
+			model.addAttribute("seccion", seccion);
+			model.addAttribute("listaMaterial", listarMaterial(seccion));
+			return "alumnoBoletaMaterial";
+		}
+	}
+	@RequestMapping("/boletaAsesoria/{id}")
+	public String boletaAsesoria(@PathVariable int id,Model model, RedirectAttributes objRedir) 
+	throws ParseException{
+		Optional<Matricula>objMatricula=mService.buscarId(id);
+		Seccion seccion=new Seccion();
+		double total=0;
+		double totalHabilitado=0;
+		double totalNoHabilitado=0;
+		if(objMatricula==null)
+			{
+			objRedir.addFlashAttribute("mensaje","Ocurrió un error");
+			return "redirect://matricula/irPerfil";
+			}
+		else {
+
+			seccion=verSeccion(objMatricula.get());
+			total=obtenerTotalAsesoria(listarAsesoria(seccion));
+			totalHabilitado=obtenerTotalHabilitadoAsesoria(listarAsesoria(seccion));
+			totalNoHabilitado=obtenerTotalNoHabilitadoAsesoria(listarAsesoria(seccion));
+			model.addAttribute("total", total);
+			model.addAttribute("totalHabilitado", totalHabilitado);
+			model.addAttribute("totalNoHabilitado", totalNoHabilitado);
+			model.addAttribute("matricula", objMatricula.get());
+			model.addAttribute("seccion", seccion);
+			model.addAttribute("listaAsesoria", listarAsesoria(seccion));
+			return "alumnoBoletaAsesoria";
+		}
+	}
+	@RequestMapping("/itemEliminar")
+	public String itemEliminar(Map<String, Object>model, @RequestParam(value="id")Integer id) {
+
+		try {
+			if(id!=null&&id>0)
+			{
+				listaM.remove(id);
+				model.put("listaMaterial", listaM);
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			model.put("mensaje", "Ocurrió un error");
+			model.put("listaMaterial", listaM);
+		}
+		return "alumnoBoletaMaterial";
+	}
+	
+	
+	@RequestMapping("/total/{id}")
+	public String total(@PathVariable int id,Model model, RedirectAttributes objRedir) 
+	throws ParseException{
+		Optional<Matricula>objMatricula=mService.buscarId(id);
+		Seccion seccion=new Seccion();
+		double total=0;
+		double totalHabilitado=0;
+		double totalNoHabilitado=0;
+		if(objMatricula==null)
+			{
+			objRedir.addFlashAttribute("mensaje","Ocurrió un error");
+			return "redirect://matricula/irPerfil";
+			}
+		else {
+
+			seccion=verSeccion(objMatricula.get());
+			total=obtenerTotalMaterial(listarMaterial(seccion));
+			totalHabilitado=obtenerTotalHabilitadoMaterial(listarMaterial(seccion));
+			totalNoHabilitado=obtenerTotalNoHabilitadoMaterial(listarMaterial(seccion));
+			model.addAttribute("total", total);
+			model.addAttribute("totalHabilitado", totalHabilitado);
+			model.addAttribute("totalNoHabilitado", totalNoHabilitado);
+			model.addAttribute("matricula", objMatricula.get());
+			model.addAttribute("seccion", seccion);
+			model.addAttribute("listaMaterial", listarMaterial(seccion));
+			return "alumnoListMaterial";
+		}
+	}
+	
+	//Funciones Extra
+	public double obtenerTotalMaterial(List<Material> lista) {
+		double suma=0;
+		for(int i=0;i<lista.size();i++)
+			{
+				suma+=lista.get(i).getTipoMaterial().getPrecioTipoMaterial();
+			}
+		return suma;
+	}
+	public double obtenerTotalHabilitadoMaterial(List<Material> lista) {
+		double suma=0;
+		for(int i=0;i<lista.size();i++)
+			{
+			if(lista.get(i).getDisponibilidadMaterial().equals("HABILITADO"))
+				suma+=lista.get(i).getTipoMaterial().getPrecioTipoMaterial();
+			}
+		return suma;
+	}
+	public double obtenerTotalNoHabilitadoMaterial(List<Material> lista) {
+		double suma=0;
+		for(int i=0;i<lista.size();i++)
+			{
+			if(lista.get(i).getDisponibilidadMaterial().equals("DESHABILITADO"))
+				suma+=lista.get(i).getTipoMaterial().getPrecioTipoMaterial();
+			}
+		return suma;
+	}
+	public double obtenerTotalAsesoria(List<Asesoria> lista) {
+		double suma=0;
+		for(int i=0;i<lista.size();i++)
+			{
+				suma+=lista.get(i).getTipoAsesoria().getPrecioTipoAsesoria();
+			}
+		return suma;
+	}
+	public double obtenerTotalHabilitadoAsesoria(List<Asesoria> lista) {
+		double suma=0;
+		for(int i=0;i<lista.size();i++)
+			{
+			if(lista.get(i).getDisponibilidadAsesoria().equals("HABILITADO"))
+				suma+=lista.get(i).getTipoAsesoria().getPrecioTipoAsesoria();
+			}
+		return suma;
+	}
+	public double obtenerTotalNoHabilitadoAsesoria(List<Asesoria> lista) {
+		double suma=0;
+		for(int i=0;i<lista.size();i++)
+			{
+			if(lista.get(i).getDisponibilidadAsesoria().equals("DESHABILITADO"))
+				suma+=lista.get(i).getTipoAsesoria().getPrecioTipoAsesoria();
+			}
+		return suma;
+	}
+	
+	
+	
 	public boolean validarMatricula(Matricula matricula) {
 		boolean flag=true;
 		List<Matricula>lista=mService.listar();
@@ -353,6 +522,20 @@ public class MatriculaController {
 		}
 		
 		return flag;
+	}
+	public Matricula verMatricula(Matricula matricula) {
+		List<Matricula>lista=mService.listar();
+		Matricula objMatricula=new Matricula();
+		if(lista.isEmpty()!=true)
+		for(int i=0;i<lista.size();i++)
+		{
+			if(lista.get(i).getIdMatricula()==matricula.getIdMatricula())
+			{
+				objMatricula=lista.get(i);
+
+			}
+		}
+		return objMatricula;		
 	}
 	public Seccion verSeccion(Matricula matricula) {
 		List<Seccion> lista=sService.listar();
@@ -376,7 +559,10 @@ public class MatriculaController {
 		{
 			if(lista.get(i).getSeccion().getIdSeccion()==seccion.getIdSeccion())
 			{
+				if(lista.get(i).getDisponibilidadMaterial().equals("DESHABILITADO"))
+					lista.get(i).setUrlMaterial("COMUNÍCATE CON EL PROFESOR PARA OBTENER ESTE MATERIAL");
 				listaMaterial.add(lista.get(i));
+			
 			}
 		}
 		
@@ -390,7 +576,10 @@ public class MatriculaController {
 		{
 			if(lista.get(i).getSeccion().getIdSeccion()==seccion.getIdSeccion())
 			{
+				if(lista.get(i).getDisponibilidadAsesoria().equals("DESHABILITADO"))
+					lista.get(i).setUrlAsesoria("COMUNÍCATE CON EL PROFESOR PARA OBTENER ESTA ASESORÍA");
 				listaAsesoria.add(lista.get(i));
+				
 			}
 		}
 		

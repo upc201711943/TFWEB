@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import pe.upc.spring.model.Alumno;
 import pe.upc.spring.model.Asesoria;
 import pe.upc.spring.model.Curso;
 import pe.upc.spring.model.Material;
@@ -142,24 +141,21 @@ public class SeccionController {
 	}
 	
 	@RequestMapping("/buscar")
-	public String buscar(Map<String, Object>model, @ModelAttribute Seccion seccion)
+	public String buscar(Map<String, Object>model, @ModelAttribute Curso curso)
 	throws ParseException{
-		List<Seccion>listaSeccion=new ArrayList<Seccion>();
 		List<Curso>listaCurso=new ArrayList<>();
-		seccion.setCurso(seccion.getCurso());
-		listaCurso=cService.buscarCurso(seccion.getCurso().getNombreCurso().toUpperCase());
-		listaSeccion=sService.buscarCurso(listaCurso.get(0).getCodigoCurso());
-		if(listaSeccion.isEmpty()) {
+		listaCurso=cService.buscarCurso(curso.getNombreCurso().toUpperCase());
+		if(listaCurso.isEmpty()) {
 			model.put("mensaje", "No se encontró");
 		}
-		model.put("listaSeccion", listaSeccion);
-		return "alumnoBuscarCurso";
+		model.put("listaCursos", listaCurso);
+		return "profesorBuscarCurso";
 	}
 	
 	@RequestMapping("/irBuscar")
 	public String irBuscar(Model model) {
-		model.addAttribute("seccion",new Seccion());
-		return "alumnoBuscarCurso";
+		model.addAttribute("curso",new Curso());
+		return "profesorBuscarCurso";
 	}
 	
 	@RequestMapping("/cursos")
@@ -197,6 +193,7 @@ public class SeccionController {
 			}
 		else {
 			seccion=verSeccion(objSeccion.get());
+			model.addAttribute("seccion", seccion);
 			model.addAttribute("listaMaterial", listarMaterial(seccion));
 			return "profesorListMaterial";
 		}
@@ -213,6 +210,7 @@ public class SeccionController {
 			}
 		else {
 			seccion=verSeccion(objSeccion.get());
+			model.addAttribute("seccion", seccion);
 			model.addAttribute("listaAsesorias", listarAsesoria(seccion));
 			return "profesorListAsesorias";
 		}
@@ -231,7 +229,7 @@ public class SeccionController {
 			model.put("listaSeccion", sService.listar());
 		}
 		
-		return "profesorListSeccion";
+		return "redirect:/seccion/perfil";
 	}
 	@RequestMapping("/añadir/{id}")
 	public String añadirCurso(@PathVariable int id,Model model, RedirectAttributes objRedir) 
@@ -294,12 +292,12 @@ public class SeccionController {
 	public boolean validarSeccion(Seccion seccion) {
 		boolean flag=true;
 		List<Seccion>lista=sService.listar();
-		if(lista.isEmpty()!=true)
+		
 		for(int i=0;i<lista.size();i++)
 		{
-			if(lista.get(i).getIdSeccion()==seccion.getIdSeccion())
+			if(lista.get(i).getCodigoSeccion().equals(seccion.getCodigoSeccion()))
 			{
-				if(lista.get(i).getProfesor().getIdProfesor()==seccion.getProfesor().getIdProfesor())
+				if(lista.get(i).getCurso().getIdCurso()==seccion.getCurso().getIdCurso())
 					flag=false;
 			}
 		}
@@ -312,7 +310,7 @@ public class SeccionController {
 		if(lista.isEmpty()!=true)
 		for(int i=0;i<lista.size();i++)
 		{
-			if(lista.get(i).getIdSeccion()==objSeccion.getIdSeccion())
+			if(lista.get(i).getCodigoSeccion()==objSeccion.getCodigoSeccion())
 			{
 				seccion=lista.get(i);
 			}

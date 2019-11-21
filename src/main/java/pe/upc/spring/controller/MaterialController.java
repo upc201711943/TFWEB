@@ -1,6 +1,7 @@
 package pe.upc.spring.controller;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.upc.spring.model.Material;
+import pe.upc.spring.model.Seccion;
 import pe.upc.spring.service.IMaterialService;
 import pe.upc.spring.service.ISeccionService;
 import pe.upc.spring.service.ITipoMaterialService;
@@ -32,6 +34,8 @@ public class MaterialController {
 	private ISeccionService sService;
 	@Autowired
 	private ITipoMaterialService tmService;
+	
+	private String back;
 	
 	@RequestMapping("/")
 	public String irMaterial(Map<String, Object>model) {
@@ -58,11 +62,13 @@ public class MaterialController {
 		else{
 			boolean flag=mService.insertar(objMaterial);
 			if(flag) {
-				return "redirect:/material/listar";
+				back="redirect:/material/listar";
+				return back;
 			}
 			else {
 				model.addAttribute("mensaje ", "Ocurrió un error");
-				return "redirect:/material/irRegistrar";
+				back="redirect:/material/irRegistrar";
+				return back;
 			}
 		}
 	}
@@ -76,12 +82,14 @@ public class MaterialController {
 			boolean flag=mService.modificar(objMaterial);
 			if(flag) {
 				objRedir.addFlashAttribute("mensaje","Se actualizó correctamente");
-				return "redirect:/material/listar";
+				back="redirect:/material/listar";
+				return back;
 			}
 			else
 			{
 				model.addAttribute("mensaje", "Ocurrió un error");
-				return "redirect:/material/irRegistrar";
+				back="redirect:/material/irRegistrar";
+				return back;
 			}
 		}
 	}
@@ -93,7 +101,8 @@ public class MaterialController {
 		if(objMaterial==null)
 		{
 			objRedir.addFlashAttribute("mensaje", "Ocurrió un error");
-			return "redirect:/material/listar";
+			back="redirect:/material/listar";
+			return back;
 		}
 		else {
 			model.addAttribute("listaTipoMaterial",tmService.listar());
@@ -151,4 +160,89 @@ public class MaterialController {
 		model.addAttribute("material",new Material());
 		return "buscar";
 	}
+	@RequestMapping("/irProfesorMaterial/{id}")
+	public String irProfesorMaterial(@PathVariable int id,Model model, RedirectAttributes objRedir) 
+	throws ParseException{
+		Optional<Seccion>objSeccion=sService.buscarId(id);
+		List<Seccion> listaSeccion=new ArrayList<Seccion>();
+		if(objSeccion==null)
+			{
+			objRedir.addFlashAttribute("mensaje","Ocurrió un error");
+			back= "redirect://seccion/irPerfil";
+			return back;
+			}
+		else {
+			listaSeccion.add(0, objSeccion.get());;
+			model.addAttribute("listaTipoMaterial",tmService.listar());
+			model.addAttribute("listaSeccion", listaSeccion);
+			model.addAttribute("material", new Material());
+			return "profesorMaterial";
+		}
+	}
+	@RequestMapping("/profesorMaterial")
+	public String profesorMaterial(@ModelAttribute @Valid Material objMaterial, BindingResult binRes, Model model)
+	throws ParseException{
+		if(binRes.hasErrors())
+		{
+			model.addAttribute("listaTipoMaterial",tmService.listar());
+			model.addAttribute("listaSeccion", sService.listar());
+			return "profesorMaterial";}
+		else{
+			boolean flag=mService.insertar(objMaterial);
+			if(flag) {
+				back="redirect:/seccion/buscarMaterial/"+objMaterial.getSeccion().getIdSeccion();
+				return back;
+			}
+			else {
+				model.addAttribute("mensaje ", "Ocurrió un error");
+				back="redirect:/material/irProfesorMaterial";
+				return back;
+			}
+		}
+	}
+	@RequestMapping("/profesorEliminar")
+	public String profesorEliminar(Map<String, Object>model, @RequestParam(value="id")Integer id) {
+		try {
+			if(id!=null&&id>0)
+			{
+				mService.eliminar(id);
+				model.put("listaMaterial", mService.listar());
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			model.put("mensaje", "Ocurrió un error");
+			model.put("listaMaterial", mService.listar());
+		}
+		return back;
+	}
+	@RequestMapping("/profesorModificar/{id}")
+	public String profesorModificar(@PathVariable int id, Model model, RedirectAttributes objRedir)
+	throws ParseException{
+		Optional<Material>objMaterial=mService.buscarId(id);
+		List<Seccion>listaSeccion=new ArrayList<>();
+		if(objMaterial==null)
+		{
+			objRedir.addFlashAttribute("mensaje", "Ocurrió un error");
+			return back;
+		}
+		else {
+			listaSeccion.add(0, objMaterial.get().getSeccion());
+			model.addAttribute("listaTipoMaterial",tmService.listar());
+			model.addAttribute("listaSeccion", listaSeccion);
+			if(objMaterial.isPresent())
+			objMaterial.ifPresent(o-> model.addAttribute("material",o));
+			return "profesorMaterial";
+		}
+		
+	}
+
+	@RequestMapping("/back")
+	public String getBack() {
+		return back;
+	}
+
+	public void setBack(String back) {
+		this.back = back;
+	}
+	
 }
