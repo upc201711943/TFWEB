@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Perfil</title>
+<script type="text/javascript"
+	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css"></link>
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://kit.fontawesome.com/814638b048.js" crossorigin="anonymous"></script>
+
+</head>
+<body background="@{/images/fondos/fondo_salon.jpeg}">
+	<div th:replace="fragments/headerAlumno :: headerAlumno"></div>
+	<div class="container">
+		<form th:action="@{/matricula/buscarProfesor}" method="post">
+			
+			<div class="card-header text-white bg-dark" align="left" >
+			<img alt="" th:src="@{/images/perfil/profe.jpg}" style="border-radius:100%;width:125px; height:125px;">
+			
+			<br>
+			<br>
+			<div>
+			<div class="col-md-4 col-12">
+			<label for="codigoProfesor">Código:</label>
+			<p th:text="${profesor.codigoProfesor}"></p>	
+			</div>
+			<div class="col-md-4 col-12">
+			<label for="nombreProfesor">Nombre:</label>
+			<p th:text="${profesor.nombreProfesor}"></p>
+			</div>
+			<div class="col-md-4 col-12">
+			<label for="apellidoProfesor">Apellido:</label>
+			<p th:text="${profesor.apellidoProfesor}"></p>
+			</div>
+			<div class="col-md-4 col-12">
+			<label for="telefonoProfesor">Teléfono:</label>
+			<p th:text="${profesor.telefonoProfesor}"></p>
+			</div>
+			<div class="col-md-4 col-12">
+			<label for="correoProfesor">Correo:</label>
+			<p th:text="${profesor.emailProfesor}"></p>
+			</div>
+			<div class="col-md-4 col-12">
+			<label for="calificacionProfesor">Calificacion:</label>
+			<p th:text="${profesor.calificacionProfesor}+' de 100 pts'"></p>
+			
+			</div>
+			</div>
+			</div>
+		<br>
+		<br>
+		<br>
+		<h1>Cursos</h1>
+			
+			<button type="submit" class="btn btn-primary" style="width:18%;"></button>
+		</form>
+		<br>
+		<table class="table table-bordered table-hover table-striped"
+			id="tab_logic">
+			<thead>
+							<tr>
+								<th class="text-center">CÓDIGO SECCION</th>
+								<th class="text-center">NOMBRE CURSO</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="p: ${listaSeccion}">
+								<td th:text="${p.codigoSeccion}"></td>
+								<td th:text="${p.curso.nombreCurso}"></td>
+							</tr>
+						</tbody>
+		</table>
+
+		<form th:action="@{/matricula/alumnoCalificar}" method="post" th:object="${matricula}">
+			
+			<div class="card-header text-white bg-dark" align="left" >
+			<br>
+			<div class="form-group">
+				<label for="idMatricula">CODIGO DE MATRICULA:</label> 
+				<input type="text"	th:field="*{idMatricula}"></input>
+		
+			<p class="text-warning">La calificación debe variar entre 1-100 de lo contrario no será considerado válido </p>
+			<div class="form-group">
+			<label for="calificacion">CALIFICACION</label>
+				<input type="number" th:field="*{calificacion}"
+				 id="calificacion"></input>
+				<div class="alert alert-danger" 
+				th:if="${#fields.hasErrors('calificacion')}"
+				th:errors="*{calificacion}"></div>
+					</div>
+			</div>
+			</div>
+		<br>
+			<button type="submit" class="btn btn-primary" >Calificar</button>
+		</form>
+
+		<div th:if="${mensaje}" class="alert alert-info">
+			<p th:text="${mensaje}"></p>
+		</div>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>
