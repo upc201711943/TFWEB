@@ -26,7 +26,7 @@ private static final long serialVersionUID=7L;
 	@NotEmpty(message="No puedo estar vacío")
 	@NotBlank(message="No puedo estar en blanco")
 	@Column(name="nombreTipoMaterial", nullable=false)
-	@Pattern(regexp="^[ a-zA-ZÀ-ÿ\\u00f1\\u00d1]+(\\s*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]*)*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+$")
+	@Pattern(regexp="[ a-zA-Z0-9À-ÿ\\\\u00f1\\\\u00d1]{1,50}")
 	private String nombreTipoMaterial;
 
 	@Column(name="precioTipoMaterial",nullable=false)

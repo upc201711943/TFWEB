@@ -28,8 +28,18 @@ public class Asesoria implements Serializable{
 	@NotEmpty(message="No puedo estar vacío")
 	@NotBlank(message="No puedo estar en blanco")
 	@Column(name="nombreAsesoria", nullable=false)
-	@Pattern(regexp="^[ a-zA-ZÀ-ÿ\\u00f1\\u00d1]+(\\s*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]*)*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+$")
+	@Pattern(regexp="[ a-zA-Z0-9À-ÿÀ-ÿ\\u00f1\\u00d1]{1,50}")
 	private String nombreAsesoria;
+	
+	@NotEmpty(message="No puedo estar vacío")
+	@NotBlank(message="No puedo estar en blanco")
+	@Column(name="urlAsesoria", nullable=false)
+	private String urlAsesoria;
+	
+	@NotEmpty(message="No puedo estar vacío")
+	@NotBlank(message="No puedo estar en blanco")
+	@Column(name="disponibilidadAsesoria", nullable=false)
+	private String disponibilidadAsesoria;
 	
 	@ManyToOne
 	@JoinColumn(name="idTipoAsesoria",nullable=false)
@@ -44,14 +54,52 @@ public class Asesoria implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Asesoria(int idAsesoria,String nombreAsesoria,
+	
+
+	
+
+	public Asesoria(int idAsesoria,String nombreAsesoria,String urlAsesoria,String disponibilidadAsesoria,
 			TipoAsesoria tipoAsesoria, Seccion seccion) {
 		super();
 		this.idAsesoria = idAsesoria;
 		this.nombreAsesoria = nombreAsesoria;
+		this.urlAsesoria = urlAsesoria;
+		this.disponibilidadAsesoria = disponibilidadAsesoria;
 		this.tipoAsesoria = tipoAsesoria;
 		this.seccion = seccion;
 	}
+
+
+
+
+
+	public String getDisponibilidadAsesoria() {
+		return disponibilidadAsesoria;
+	}
+
+
+
+
+
+	public void setDisponibilidadAsesoria(String disponibilidadAsesoria) {
+		this.disponibilidadAsesoria = disponibilidadAsesoria;
+	}
+
+
+
+
+
+	public String getUrlAsesoria() {
+		return urlAsesoria;
+	}
+
+
+
+	public void setUrlAsesoria(String urlAsesoria) {
+		this.urlAsesoria = urlAsesoria;
+	}
+
+
 
 	public int getIdAsesoria() {
 		return idAsesoria;

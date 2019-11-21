@@ -13,7 +13,7 @@ public interface IAlumnoService {
 	public Optional<Alumno> buscarId(int idAlumno);
 	public Optional<Alumno> listarId(int idAlumno);
 	public List<Alumno> listar();
-	public List<Alumno> buscarAlumno(String nombreAlumno);
+	public List<Alumno> buscarAlumno(String codigoAlumno);
 	
 	
 }

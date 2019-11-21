@@ -14,4 +14,6 @@ public interface IProfesorService{
 	public Optional<Profesor> buscarId(int idProfesor);
 	public List<Profesor>listar();
 	public List<Profesor>buscarProfesor(String nombreProfesor);
+	public List<Profesor>buscarCodigo(String codigoProfesor);
+
 }

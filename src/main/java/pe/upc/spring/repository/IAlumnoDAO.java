@@ -12,7 +12,7 @@ import pe.upc.spring.model.Alumno;
 @Repository
 public interface IAlumnoDAO extends JpaRepository<Alumno, Integer>{
 
-	@Query("from Alumno c where c.nombreAlumno like %:nombreAlumno%")
-	List<Alumno>buscarAlumno(@Param("nombreAlumno")String nombreAlumno);
+	@Query("from Alumno c where c.codigoAlumno like %:codigoAlumno%")
+	List<Alumno>buscarAlumno(@Param("codigoAlumno")String codigoAlumno);
 
 }

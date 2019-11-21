@@ -32,13 +32,13 @@ public class Profesor implements Serializable{
 	@NotEmpty(message="No puedo estar vacío")
 	@NotBlank(message="No puedo estar en blanco")
 	@Column(name="nombreProfesor", nullable=false)
-	@Pattern(regexp="^[ a-zA-ZÀ-ÿ\\u00f1\\u00d1]+(\\s*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]*)*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+$")
+	@Pattern(regexp="[ a-zA-ZÀ-ÿ\\u00f1\\u00d1]{1,50}")
 	private String nombreProfesor;
 	
 	@NotEmpty(message="No puedo estar vacío")
 	@NotBlank(message="No puedo estar en blanco")
 	@Column(name="apellidoProfesor",nullable=false)
-	@Pattern(regexp="^[ a-zA-ZÀ-ÿ\\u00f1\\u00d1]+(\\s*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]*)*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+$")
+	@Pattern(regexp="[ a-zA-ZÀ-ÿ\\u00f1\\u00d1]{1,50}")
 	private String apellidoProfesor;
 	
 	@Email

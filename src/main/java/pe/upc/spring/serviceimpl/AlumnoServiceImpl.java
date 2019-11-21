@@ -69,8 +69,8 @@ public class AlumnoServiceImpl implements IAlumnoService{
 	
 	@Override
 	@Transactional
-	public List<Alumno>buscarAlumno(String nombreAlumno){
-		return dAlumno.buscarAlumno(nombreAlumno);
+	public List<Alumno>buscarAlumno(String codigoAlumno){
+		return dAlumno.buscarAlumno(codigoAlumno);
 	}
 	
 }

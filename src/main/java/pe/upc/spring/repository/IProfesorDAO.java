@@ -14,4 +14,7 @@ public interface IProfesorDAO extends JpaRepository<Profesor, Integer>{
 
 	@Query("from Profesor p where p.nombreProfesor like %:nombreProfesor%")
 	List<Profesor> buscarProfesor(@Param("nombreProfesor") String nombreProfesor);
+	
+	@Query("from Profesor p where p.codigoProfesor like %:codigoProfesor%")
+	List<Profesor> buscarCodigo(@Param("codigoProfesor") String codigoProfesor);
 }

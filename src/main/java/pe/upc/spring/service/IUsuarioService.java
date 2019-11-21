@@ -14,6 +14,5 @@ public interface IUsuarioService {
 	public Optional<Usuario> buscarId(Long id);
 	public Optional<Usuario> listarId(Long id);
 	public List<Usuario> listar();
-	//public List<Usuario> buscarUsuario(String nombreUsuario);
 	
 }

@@ -65,6 +65,6 @@ public class UsuarioServiceImpl implements IUsuarioService{
 	@Transactional(readOnly=true)
 	public List<Usuario>listar(){
 		return dUsuario.findAll();
-	}	
+	}
 }
 	

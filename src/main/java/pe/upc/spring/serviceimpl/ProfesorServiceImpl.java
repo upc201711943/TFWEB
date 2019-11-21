@@ -66,4 +66,9 @@ public class ProfesorServiceImpl implements IProfesorService{
 	public List<Profesor> buscarProfesor(String nombreProfesor){
 		return dProfesor.buscarProfesor(nombreProfesor);
 	}
+	@Override
+	@Transactional
+	public List<Profesor>buscarCodigo(String codigoProfesor){
+	return dProfesor.buscarCodigo(codigoProfesor);
+	}
 }
