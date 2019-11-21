@@ -67,7 +67,7 @@ public class Profesor implements Serializable{
 	private String gradoProfesor;
 
 	@Column(name="calificacionProfesor",nullable=true)
-	private float calificacionProfesor;
+	private double calificacionProfesor;
 
 	public Profesor() {
 		super();
@@ -75,7 +75,7 @@ public class Profesor implements Serializable{
 	}
 
 	public Profesor(int idProfesor,String codigoProfesor,String nombreProfesor,String apellidoProfesor,String emailProfesor,
-			String passwordProfesor,String telefonoProfesor,int notaProfesor,String gradoProfesor,float calificacionProfesor) {
+			String passwordProfesor,String telefonoProfesor,int notaProfesor,String gradoProfesor,double calificacionProfesor) {
 		super();
 		this.idProfesor = idProfesor;
 		this.codigoProfesor = codigoProfesor;
@@ -162,11 +162,11 @@ public class Profesor implements Serializable{
 		this.notaProfesor = notaProfesor;
 	}
 
-	public float getCalificacionProfesor() {
+	public double getCalificacionProfesor() {
 		return calificacionProfesor;
 	}
 
-	public void setCalificacionProfesor(float calificacionProfesor) {
+	public void setCalificacionProfesor(double calificacionProfesor) {
 		this.calificacionProfesor = calificacionProfesor;
 	}
 

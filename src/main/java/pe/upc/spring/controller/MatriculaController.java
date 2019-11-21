@@ -22,11 +22,13 @@ import pe.upc.spring.model.Alumno;
 import pe.upc.spring.model.Asesoria;
 import pe.upc.spring.model.Material;
 import pe.upc.spring.model.Matricula;
+import pe.upc.spring.model.Profesor;
 import pe.upc.spring.model.Seccion;
 import pe.upc.spring.service.IAlumnoService;
 import pe.upc.spring.service.IAsesoriaService;
 import pe.upc.spring.service.IMaterialService;
 import pe.upc.spring.service.IMatriculaService;
+import pe.upc.spring.service.IProfesorService;
 import pe.upc.spring.service.ISeccionService;
 
 @Controller
@@ -43,11 +45,9 @@ public class MatriculaController {
 	private IAsesoriaService asService;
 	@Autowired
 	private IMaterialService maService;
+	@Autowired
+	private IProfesorService pService;
 	
-	private List<Material>listaM;
-	MatriculaController(){
-		listaM=new ArrayList<>();
-	} 
 	
 	@RequestMapping("/")
 	public String irRegistrar(Map<String, Object>model) {
@@ -405,23 +405,6 @@ public class MatriculaController {
 			return "alumnoBoletaAsesoria";
 		}
 	}
-	@RequestMapping("/itemEliminar")
-	public String itemEliminar(Map<String, Object>model, @RequestParam(value="id")Integer id) {
-
-		try {
-			if(id!=null&&id>0)
-			{
-				listaM.remove(id);
-				model.put("listaMaterial", listaM);
-			}
-		}catch(Exception e) {
-			System.out.println(e.getMessage());
-			model.put("mensaje", "Ocurrió un error");
-			model.put("listaMaterial", listaM);
-		}
-		return "alumnoBoletaMaterial";
-	}
-	
 	
 	@RequestMapping("/total/{id}")
 	public String total(@PathVariable int id,Model model, RedirectAttributes objRedir) 
@@ -449,6 +432,74 @@ public class MatriculaController {
 			model.addAttribute("seccion", seccion);
 			model.addAttribute("listaMaterial", listarMaterial(seccion));
 			return "alumnoListMaterial";
+		}
+	}
+	@RequestMapping("/buscarProfesor/{id}")
+	public String buscarProfesor(@PathVariable int id,Model model, RedirectAttributes objRedir) 
+	throws ParseException{
+		Optional<Matricula>objMatricula=mService.buscarId(id);
+		Seccion seccion=new Seccion();
+		List<Seccion>listaSeccion;
+		
+		if(objMatricula==null)
+			{
+			objRedir.addFlashAttribute("mensaje","Ocurrió un error");
+			return "redirect://matricula/irPerfil";
+			}
+		else {
+			seccion=verSeccion(objMatricula.get().getSeccion());
+			listaSeccion=sService.buscarProfesor(seccion.getProfesor().getCodigoProfesor());
+			if(listaSeccion.isEmpty()) {
+				model.addAttribute("mensaje", "No se encontró");
+				return "redirect://matricula/irPerfil";
+			}
+			else {
+				model.addAttribute("listaSeccion", listaSeccion);
+				model.addAttribute("matricula",verMatricula(objMatricula.get()));
+				model.addAttribute("profesor", seccion.getProfesor());
+				model.addAttribute("seccion", seccion);
+				return "alumnoProfesorPerfil";
+			}
+		}
+	}
+	@RequestMapping("/alumnoCalificar")
+	public String alumnoCalificar(@ModelAttribute @Valid Matricula Matricula, BindingResult binRes, Model model) 
+	throws ParseException{
+		Matricula objMatricula=verMatricula(Matricula);
+		if(objMatricula==null)
+			{
+			model.addAttribute("mensaje", "No se encuentra esa matrícula");
+			return "redirect://matricula/buscarProfesor/"+Matricula.getIdMatricula();
+			}
+	
+		if(binRes.hasErrors())
+		{
+			model.addAttribute("listaSeccion", sService.listar());
+			model.addAttribute("listaAlumnos", aService.listar());
+			return "redirect://matricula/buscarProfesor/"+Matricula.getIdMatricula();
+			}
+		else {
+
+			objMatricula.setCalificacion(Matricula.getCalificacion());
+				boolean flag=mService.insertar(objMatricula);
+				if(flag) {
+					flag=actualizarCalificacionProfesor(objMatricula);
+					if(flag) {
+					
+					model.addAttribute("mensaje", "Gracias por calificar al profesor "+objMatricula.getSeccion().getProfesor().getNombreProfesor());
+					return "redirect:/matricula/buscarProfesor/"+objMatricula.getIdMatricula();
+					}
+					else {
+						model.addAttribute("mensaje", "Ocurrió un error al actualizar profesor");
+						return "redirect:/matricula/buscarProfesor/"+objMatricula.getIdMatricula();
+					}
+
+					}
+				else {
+					model.addAttribute("mensaje", "Ocurrió un error al calificar al profesor");
+					return "redirect:/matricula/buscarProfesor/"+objMatricula.getIdMatricula();
+				}
+
 		}
 	}
 	
@@ -518,6 +569,22 @@ public class MatriculaController {
 			{
 				if(lista.get(i).getAlumno().getIdAlumno()==matricula.getAlumno().getIdAlumno())
 					flag=false;
+			}
+		}
+		
+		return flag;
+	}
+	public boolean validarCalificacion(Matricula matricula) {
+		boolean flag=true;
+		List<Matricula>lista=mService.listar();
+		if(lista.isEmpty()!=true)
+		for(int i=0;i<lista.size();i++)
+		{
+			if(lista.get(i).getSeccion().getIdSeccion()==matricula.getSeccion().getIdSeccion())
+			{
+				if(lista.get(i).getAlumno().getIdAlumno()==matricula.getAlumno().getIdAlumno())
+					if(lista.get(i).getCalificacion()>0)
+						flag=false;
 			}
 		}
 		
@@ -593,5 +660,51 @@ public class MatriculaController {
 		for(int i=0;i<alumnos.size();i++)
 			alumno.setIdAlumno(alumnos.get(i).getIdAlumno());
 		return alumno;
+	}
+	public Seccion verSeccion(Seccion objSeccion) {
+		List<Seccion> lista=sService.listar();
+		Seccion seccion=new Seccion();
+		if(lista.isEmpty()!=true)
+		for(int i=0;i<lista.size();i++)
+		{
+			if(lista.get(i).getCodigoSeccion()==objSeccion.getCodigoSeccion())
+			{
+				seccion=lista.get(i);
+			}
+		}
+		
+		return seccion;
+	}
+	public boolean actualizarCalificacionProfesor(Matricula matricula) {
+		List<Matricula>listaM=mService.listar();
+		double promedio=0;
+		int cont=0;
+		Profesor profesor=new Profesor();
+		boolean flag=true;
+		for(int i=0;i<listaM.size();i++)
+		{
+			if(listaM.get(i).getSeccion().getProfesor().getIdProfesor()==matricula.getSeccion().getProfesor().getIdProfesor())
+			{
+				if(listaM.get(i).getCalificacion()>0&&listaM.get(i).getCalificacion()<=100)
+				{
+				cont++;
+				promedio+=listaM.get(i).getCalificacion();
+			}
+			}
+		}
+		if(cont!=0)
+		{
+
+			promedio=promedio/cont;
+			profesor=matricula.getSeccion().getProfesor();
+			profesor.setCalificacionProfesor(promedio);
+			flag=pService.insertar(profesor);
+				
+		}
+		else
+			flag=false;
+		
+		return flag;		
+		
 	}
 }

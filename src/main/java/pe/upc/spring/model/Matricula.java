@@ -30,7 +30,7 @@ public class Matricula implements Serializable {
 	@JoinColumn(name="idSeccion",nullable=false)
 	private Seccion seccion;
 
-	@Column(name="calificacion",nullable=true)
+	@Column(name="calificacion")
 	private int calificacion;
 
 	

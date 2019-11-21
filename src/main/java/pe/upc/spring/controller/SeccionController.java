@@ -297,7 +297,7 @@ public class SeccionController {
 		{
 			if(lista.get(i).getCodigoSeccion().equals(seccion.getCodigoSeccion()))
 			{
-				if(lista.get(i).getCurso().getIdCurso()==seccion.getCurso().getIdCurso())
+				//if(lista.get(i).getCurso().getIdCurso()==seccion.getCurso().getIdCurso())
 					flag=false;
 			}
 		}
